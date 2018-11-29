@@ -1,0 +1,44 @@
+.App {
+  text-align: center;
+}
+
+/* body{
+  background-color:#757575;
+} */
+
+.App-header {
+  background-color:#212121;
+  height: 200px;
+  color: white;
+  font-size: large;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+footer{
+  margin-top: 600px;
+  background-color: dodgerblue;
+  height: 70px;
+  padding: 20px;
+  color: white;
+}
+a{
+  color: white;
+}
+#titlename{
+color: white;
+font-size: xx-large;
+padding-top: 20px;
+
+}
+#headerImage{
+  height: 130px;
+  width: 350px;
+   
+}
+#studentlink{
+  color: blue;
+
+}
