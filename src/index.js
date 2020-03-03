@@ -7,13 +7,15 @@ import './index.css';
 import App from './App';
 import * as firebase from 'firebase';
 var config = {
-    apiKey: "AIzaSyBhbe3f5GyUR61btnW3w1iscMQwnwLusio",
-    authDomain: "login-signup-2e4d2.firebaseapp.com",
-    databaseURL: "https://login-signup-2e4d2.firebaseio.com",
-    projectId: "login-signup-2e4d2",
-    storageBucket: "login-signup-2e4d2.appspot.com",
-    messagingSenderId: "371983608218"
-  };
- var index= firebase.initializeApp(config);
+    apiKey: "AIzaSyDfzLK4_Ct2TB45Iwf8svzN140u0j7t3xs",
+    authDomain: "jobhunter-6f17c.firebaseapp.com",
+    databaseURL: "https://jobhunter-6f17c.firebaseio.com",
+    projectId: "jobhunter-6f17c",
+    storageBucket: "jobhunter-6f17c.appspot.com",
+    messagingSenderId: "673335986299",
+    appId: "1:673335986299:web:68bd521f211805c7d5bade",
+    measurementId: "G-RP9QQBVLG6"
+};
+firebase.initializeApp(config);
 
 render (<App/>, document.getElementById('root') );

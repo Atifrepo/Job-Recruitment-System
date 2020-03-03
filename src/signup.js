@@ -39,7 +39,7 @@ class SignUp extends Component {
             var uid = firebase.auth().currentUser.uid
             console.log('we are here');
             console.log(this.state.myInfo);
-
+            console.log(uid);
             firebase.database().ref('USER' + '/' + uid).set({
                 fname: this.state.myInfo.fName,
                 lName: this.state.myInfo.lName,
