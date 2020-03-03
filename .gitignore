@@ -7,4 +7,5 @@
 *.iml
 out
 gen
-node_modules/*
+node_modules
+
