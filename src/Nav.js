@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import './Nav.css'
 
 import { Button } from 'react-bootstrap';
-import SignUp from './signup';
+import ApplyJob from './ApplyJob';
 import Login from './login';
 import Logout from './logout'
 class Nav extends Component {

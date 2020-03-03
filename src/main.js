@@ -6,7 +6,7 @@ import{
   }from 'react-router-dom';
 import Home from './home'
 import Login from './login'
-import SignUp from './signup'
+import ApplyJob from './ApplyJob'
 import Student from './pages/Student';
 import Company from './pages/Company';
 import Admin from './pages/Admin';
@@ -15,7 +15,7 @@ const Main = () => (
 <Router>
     {/* <Route exact path='/' component={Home}/> */}
       <Route exact path='/' component={Login} />
-      <Route path='/signup' component={SignUp} />
+      <Route path='/apply' component={ApplyJob} />
       <Route  path='/student' component={Student} />
       <Route  path='/company' component={Company} />
       <Route path='/Admin' component={Admin} />

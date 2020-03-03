@@ -4,7 +4,7 @@ import Company from './pages/Company'
 import Admin from './pages/Admin'
 import logo from './logo.svg';
 import './App.css';
-import SignUp from './signup';
+import ApplyJob from './ApplyJob';
 import Login from './login';
 import Header from './header'
 import Main from './main'
@@ -34,7 +34,7 @@ class App extends Component {
           <div>
       {/* <Route path='/loginnn' Component={Main} />  */}
       <Route exact path='/' component={Login} />
-      <Route path='/signup' component={SignUp} />
+      <Route path='/apply' component={ApplyJob} />
       <Route  path='/student' component={Student} />
       <Route  path='/company' component={Company} />
       <Route path='/Admin' component={Admin} />
