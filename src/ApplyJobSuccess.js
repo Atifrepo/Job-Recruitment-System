@@ -92,7 +92,7 @@ render(){
                 </DialogContent>
                 <DialogActions>
                     {/*<Button variant="outlined" autoFocus onClick={this.handleClose} color="blue" >*/}
-                        <NavLink style={{color: 'blue', textDecoration: 'none'}}  to={this.props.link}>OK&nbsp;&nbsp;</NavLink>
+                        <NavLink className="btn btn-primary"  to={this.props.link}>OK</NavLink>
                     {/*</Button>*/}
                 </DialogActions>
             </Dialog>
