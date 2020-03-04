@@ -3,27 +3,28 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 
 import './style.less'
+import {NavLink} from "react-bootstrap";
 
-class CommentItem extends React.Component {
+class JobItem extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
     render() {
         // 获取数据
-        const item = this.props.data
-
+        const item = this.props.data;
+        let link = "/jobSummary/"+ item.id;
         return (
             <div className="comment-item">
                 <h3>
                     <i className="icon-user"></i>
                     &nbsp;&nbsp;
-                    {item.username}
+                    <NavLink href={link}>{item.jobName}</NavLink>
                 </h3>
-                <p>{item.comment}</p>
+                <p>Status:{item.status}</p>
             </div>
         )
     }
 }
 
-export default CommentItem
+export default JobItem

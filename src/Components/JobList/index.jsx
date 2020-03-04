@@ -5,7 +5,7 @@ import Item from './Item'
 
 import './style.less'
 
-class CommentList extends React.Component {
+class JobList extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
@@ -16,13 +16,13 @@ class CommentList extends React.Component {
         //const data = this.props.data
         const data =
             [
-                {
-                    username: "guanzhou",
-                    comment: "hello"
+                {   jobName: "help with my cat",
+                    id: "1",
+                    status:"In Progress"
                 },
-                {
-                    username: "guanzhou2",
-                    comment: "hello2"
+                {   jobName: "Math homework",
+                    id: "2",
+                    status:"Complete"
                 }
                 ]
 
@@ -36,4 +36,4 @@ class CommentList extends React.Component {
     }
 }
 
-export default CommentList
+export default JobList

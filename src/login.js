@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField'
-import { Link } from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import * as firebase from 'firebase';
 import AppBar from 'material-ui/AppBar/AppBar';
@@ -25,7 +25,22 @@ class Login extends Component {
             },
             fields: [],
             // error: 'this is error'
+            user: null
         }
+    }
+
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged(() => {
+
+            var userId = firebase.auth().currentUser.uid;
+            const rootRef = firebase.database().ref();
+            const speedRef = rootRef.child('USER/' + userId);
+            speedRef.on('value', snap => {
+                var userName = snap.val().fname;
+                console.log(userName);
+                this.setState({ user: userName })
+            });
+        })
     }
 
     handleClick(event) {
@@ -108,7 +123,8 @@ class Login extends Component {
 
 
             <div>
-                <form>
+                {this.state.user?
+                    <form>
                     <div>
                         <AppBar style={{ backgroundColor: '#212121' }} title='Login' ></AppBar>
                     </div>
@@ -147,6 +163,10 @@ class Login extends Component {
                         <Button variant="contained" >Don't have account?</Button>
                     </Link>
                 </form>
+                    :
+                    <Redirect to="/student"/>
+                }
+
             </div>
 
         )

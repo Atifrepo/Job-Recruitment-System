@@ -5,7 +5,7 @@ import ViewCompany from './ViewCompany'
 import ViewJobs from './ViewJobs';
 import './LeftPanelStudents.css';
 import {BrowserRouter as Router, Route, Redirect, Link} from 'react-router-dom';
-import CommentList from "./Components/CommentList";
+import JobList from "./Components/JobList";
 class LeftPanelStudents extends Component {
 
     constructor() {
@@ -50,11 +50,11 @@ class LeftPanelStudents extends Component {
                         <h1> Student </h1>
                         <h2 style={{ color: '#212121' }}>{this.state.user}</h2>
 
-                        <CommentList></CommentList>
+                        <JobList></JobList>
                     </div> 
                     :
                          //if not log in, redirect to login page.
-                         <Redirect to="/" />
+                         <Redirect to="/"/>
                      }
                     <Route path='/student/StudentDetails' component={StudentDetails} />
                     <Route path='/student/ViewJobs' component={ViewJobs} />
