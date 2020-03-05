@@ -6,6 +6,8 @@ import ViewJobs from './ViewJobs';
 import './LeftPanelStudents.css';
 import {BrowserRouter as Router, Route, Redirect, Link} from 'react-router-dom';
 import JobList from "./Components/JobList";
+import JobListApply from "./Components/JobListApply";
+import Divider from "@material-ui/core/Divider";
 class LeftPanelStudents extends Component {
 
     constructor() {
@@ -44,21 +46,30 @@ class LeftPanelStudents extends Component {
     render() {
         return (
             <Router>
-                <div style={{backgroundColor:'#BDBDBD'}}>
+                <div >
                      {this.state.user?
-                    <div>
-                        <h1> Student </h1>
-                        <h2 style={{ color: '#212121' }}>{this.state.user}</h2>
+                         <div>
+                             <div style={{backgroundColor:'#152938', height: 50}}>
+                                 <h2 style={{ color: '#FFFFFF' }}>{this.state.user}</h2>
+                             </div>
+                             <div style={{margin:'auto', height:'auto', overflow:'auto',backgroundColor:'#1f3b51'}}>
+                                 <h3 style={{ color: '#FFFFFF' }}>My Post</h3>
+                                 <Divider/>
+                                 <JobList/>
+                         </div>
+                             <div style={{margin:'auto', height:'auto', overflow:'auto',backgroundColor:'#4b6273'}}>
+                                 <h3 style={{ color: '#FFFFFF' }}>My Application</h3>
+                                 <Divider/>
+                                 <JobListApply/>
+                             </div>
 
-                        <JobList></JobList>
-                    </div> 
+                         </div>
+
+
                     :
                          //if not log in, redirect to login page.
                          <Redirect to="/"/>
                      }
-                    <Route path='/student/StudentDetails' component={StudentDetails} />
-                    <Route path='/student/ViewJobs' component={ViewJobs} />
-                    <Route path='/student/ViewCompany' component={ViewCompany} />
 
                    
 

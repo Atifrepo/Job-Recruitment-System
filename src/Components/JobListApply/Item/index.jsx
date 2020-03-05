@@ -1,10 +1,10 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
+
 import './style.less'
 import {NavLink} from "react-bootstrap";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faUserClock} from '@fortawesome/free-solid-svg-icons'
+
 class JobItem extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -18,7 +18,7 @@ class JobItem extends React.Component {
             <div className="comment-item">
                 <h3>
                     <i className="icon-user"></i>
-                    <NavLink href={link}>{item.jobName} &nbsp;{item.id==1?<FontAwesomeIcon icon={faUserClock}/>:''} </NavLink>
+                    <NavLink href={link}>{item.jobName}</NavLink>
                 </h3>
                 <p style={{ color: '#FFFFFF' }}>Status:{item.status}</p>
             </div>

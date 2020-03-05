@@ -51,7 +51,7 @@ class ContactItem extends React.Component {
                         }
                     />
                 </ListItem>
-                <Divider variant="inset" component="li"/>
+                <Divider/>
             </div>
         )
     }

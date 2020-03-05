@@ -26,12 +26,15 @@ class ContactList extends React.Component {
                 email:"jessicab@gamil.com"
             }];
         return (
+            <div >
+            <h3 align={'left'}>&nbsp;&nbsp;Applied Candidate</h3>
             <List className="root">
                 {data.map((item, index) => {
                     return <Item key={index} data={item}/>
                 })}
 
             </List>
+            </div>
         )
     }
 }

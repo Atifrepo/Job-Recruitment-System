@@ -5,7 +5,7 @@ import Item from './Item'
 
 import './style.less'
 
-class JobList extends React.Component {
+class JobListApply extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
@@ -14,17 +14,17 @@ class JobList extends React.Component {
     render() {
         // 获取数据
         //const data = this.props.data
-        const data =
-            [
-                {   jobName: "help with my cat",
-                    id: "1",
-                    status:"In Progress",
-                },
-                {   jobName: "Math homework",
-                    id: "2",
-                    status:"Complete"
-                }
-                ]
+        const data = [{
+            jobName: "House Moving",
+            id: "3",
+            status: "In Progress",
+            apply_date: "2020-03-04"
+        }, {
+            jobName: "Chemistry Midterm review",
+            id: "4",
+            status: "Complete",
+            apply_date: "2020-02-15"
+        }];
 
         return (
             <div className="comment-list">
@@ -36,4 +36,4 @@ class JobList extends React.Component {
     }
 }
 
-export default JobList
+export default JobListApply
