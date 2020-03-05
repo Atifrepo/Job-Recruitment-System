@@ -1,5 +1,4 @@
 import React from 'react'
-import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import Item from './Item'
@@ -9,7 +8,7 @@ import './style.less'
 class ContactList extends React.Component {
     constructor(props, context) {
         super(props, context);
-        this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+        //this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
 
     render() {
