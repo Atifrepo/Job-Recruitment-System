@@ -24,7 +24,7 @@ class Student extends Component {
             <div>
                 
                 <LeftPanelStudents {...this.props}/>
-                <Logout {...this.props}/>
+
             </div>
         );
     }

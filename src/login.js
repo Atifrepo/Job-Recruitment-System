@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import TextField from 'material-ui/TextField'
 import {Link, Redirect} from 'react-router-dom'
 import Button from '@material-ui/core/Button'
@@ -20,7 +20,7 @@ class Login extends Component {
                 Contact_Number: '',
                 Passport_Number: '',
                 NIC_Number: '',
-                 type: ''
+                type: ''
 
             },
             fields: [],
@@ -29,71 +29,68 @@ class Login extends Component {
         }
     }
 
-    componentDidMount() {
-        firebase.auth().onAuthStateChanged(() => {
-
-            var userId = firebase.auth().currentUser.uid;
-            const rootRef = firebase.database().ref();
-            const speedRef = rootRef.child('USER/' + userId);
-            speedRef.on('value', snap => {
-                var userName = snap.val().fname;
-                console.log(userName);
-                this.setState({ user: userName })
-            });
-        })
-    }
+    // componentDidMount() {
+    //     firebase.auth().onAuthStateChanged(() => {
+    //         var userId = firebase.auth().currentUser.uid;
+    //         const rootRef = firebase.database().ref();
+    //         const speedRef = rootRef.child('USER/' + userId);
+    //         speedRef.on('value', snap => {
+    //             var userName = snap.val().fname;
+    //             console.log(userName);
+    //             this.setState({ user: userName })
+    //         });
+    //     })
+    // }
 
     handleClick(event) {
-        firebase.auth().signInWithEmailAndPassword(this.state.myInfo.e_mail, this.state.myInfo.password).then((sucess, error) => {
-            // var errorCode = error.code;
-            // var errorMessage = error.message;
-            // if (errorCode === 'auth/wrong-password') {
-            //     alert('Wrong password.');
-            // } else {
-            //     alert(errorMessage);
-
-            var typeCheck;
-            var userId = firebase.auth().currentUser.uid;
-            const rootRef = firebase.database().ref();
-            const speedRef = rootRef.child('USER/' + userId);
-            speedRef.on('value', snap => {
-                typeCheck = snap.val().type;
-                //console.log(typeCheck);
-                
-                if (typeCheck == 'student') {
-
-                    this.props.history.push('/student');
-                    console.log("if k andr hun");
-                }
-                // console.log('Hello Student!');
-
-                if (typeCheck == 'company') {
-
-                    this.props.history.push('/company');
-                    console.log(typeCheck);
-                }
-                //console.log('hello Company');
-                if (typeCheck == 'Admin') {
-                    this.props.history.push('/Admin');
-                }
-
-            })
-
-
-
-            // if (error) {
-            //    console.log('error');
-            // }
-            // if (sucess) {
-            //     console.log('success');
-            // }
-            // // }
-            // //alert('error', error,'sucess', sucess);
-        }).catch((error) => {
-            alert('invalid email or password', error);
-        })
+        this.props.history.push('/student');
+        // firebase.auth().signInWithEmailAndPassword(this.state.myInfo.e_mail, this.state.myInfo.password).then((sucess, error) => {
+        //     // var errorCode = error.code;
+        //     // var errorMessage = error.message;
+        //     // if (errorCode === 'auth/wrong-password') {
+        //     //     alert('Wrong password.');
+        //     // } else {
+        //     //     alert(errorMessage);
+        //
+        //     var typeCheck;
+        //     var userId = firebase.auth().currentUser.uid;
+        //     const rootRef = firebase.database().ref();
+        //     const speedRef = rootRef.child('USER/' + userId);
+        //     speedRef.on('value', snap => {
+        //         typeCheck = snap.val().type;
+        //         //console.log(typeCheck);
+        //
+        //         if (typeCheck == 'student') {
+        //
+        //             this.props.history.push('/student');
+        //             console.log("if k andr hun");
+        //         }
+        //         // console.log('Hello Student!');
+        //
+        //         if (typeCheck == 'company') {
+        //
+        //             this.props.history.push('/company');
+        //             console.log(typeCheck);
+        //         }
+        //         //console.log('hello Company');
+        //         if (typeCheck == 'Admin') {
+        //             this.props.history.push('/Admin');
+        //         }
+        //
+        //     })
 
 
+        // if (error) {
+        //    console.log('error');
+        // }
+        // if (sucess) {
+        //     console.log('success');
+        // }
+        // // }
+        // //alert('error', error,'sucess', sucess);
+        // }).catch((error) => {
+        //     alert('invalid email or password', error);
+        // })
 
 
     }
@@ -123,47 +120,47 @@ class Login extends Component {
 
 
             <div>
-                {this.state.user?
+                {this.state.user === null ?
                     <form>
-                    <div>
-                        <AppBar style={{ backgroundColor: '#212121' }} title='Login' ></AppBar>
-                    </div>
-                    <TextField
-                        name="e_mail"
-                        hintText="Email"
-                        floatingLabelText="Email"
-                        value={this.state.myInfo.e_mail}
-                        onChange={this.inputChange.bind(this, "e_mail")}
-                        floatingLabelFixed
+                        <div>
+                            <AppBar style={{backgroundColor: '#212121'}} title='Login'></AppBar>
+                        </div>
+                        <TextField
+                            name="e_mail"
+                            hintText="Email"
+                            floatingLabelText="Email"
+                            value={this.state.myInfo.e_mail}
+                            onChange={this.inputChange.bind(this, "e_mail")}
+                            floatingLabelFixed
 
-                    />
-                    <br></br>
-
-
-                    <TextField
-                        name="password"
-                        hintText="Password"
-                        floatingLabelText="Password"
-                        value={this.state.myInfo.password}
-                        onChange={this.inputChange.bind(this, "password")}
-                        type="password"
-                        floatingLabelFixed
-                    />
-                    <br></br>
+                        />
+                        <br></br>
 
 
+                        <TextField
+                            name="password"
+                            hintText="Password"
+                            floatingLabelText="Password"
+                            value={this.state.myInfo.password}
+                            onChange={this.inputChange.bind(this, "password")}
+                            type="password"
+                            floatingLabelFixed
+                        />
+                        <br></br>
 
-                    <Button variant="contained" onClick={(event) => this.handleClick(event)}><b>login</b></Button>
-                    <Link to={{
-                        pathname: '/Signup',
-                        data: this.state.myInfo
+
+                        <Button variant="contained" onClick={(event) => this.handleClick(event)}><b>login</b></Button>
+                        <Link to={{
+                            pathname: '/Signup',
+                            data: this.state.myInfo
 
 
-                    }}>
-                        <Button variant="contained" >Don't have account?</Button>
-                    </Link>
-                </form>
+                        }}>
+                            <Button variant="contained">Don't have account?</Button>
+                        </Link>
+                    </form>
                     :
+                    // <div>{this.state.user}</div>
                     <Redirect to="/student"/>
                 }
 
@@ -174,4 +171,5 @@ class Login extends Component {
     }
 
 }
+
 export default Login

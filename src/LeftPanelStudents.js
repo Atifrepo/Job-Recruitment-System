@@ -8,28 +8,29 @@ import {BrowserRouter as Router, Route, Redirect, Link} from 'react-router-dom';
 import JobList from "./Components/JobList";
 import JobListApply from "./Components/JobListApply";
 import Divider from "@material-ui/core/Divider";
+import Logout from "./logout";
 class LeftPanelStudents extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            user: null
+            user: 'guanzhou'
         }
     }
 
-    componentDidMount() {
-        firebase.auth().onAuthStateChanged(() => {
-
-            var userId = firebase.auth().currentUser.uid;
-            const rootRef = firebase.database().ref();
-            const speedRef = rootRef.child('USER/' + userId);
-            speedRef.on('value', snap => {
-                var userName = snap.val().fname
-                console.log(userName);
-                this.setState({ user: userName })
-            });
-        })
-    }
+    // componentDidMount() {
+    //     firebase.auth().onAuthStateChanged(() => {
+    //
+    //         var userId = firebase.auth().currentUser.uid;
+    //         const rootRef = firebase.database().ref();
+    //         const speedRef = rootRef.child('USER/' + userId);
+    //         speedRef.on('value', snap => {
+    //             var userName = snap.val().fname;
+    //             console.log(userName);
+    //             this.setState({ user: userName })
+    //         });
+    //     })
+    // }
 
     // StudentDetailss() {
     //     this.props.push('/StudentDetails');
@@ -45,8 +46,9 @@ class LeftPanelStudents extends Component {
 
     render() {
         return (
-            <Router>
+            <div>
                 <div >
+
                      {this.state.user?
                          <div>
                              <div style={{backgroundColor:'#152938', height: 50}}>
@@ -74,8 +76,8 @@ class LeftPanelStudents extends Component {
                    
 
                 </div>
-
-            </Router>
+                <Logout {...this.props}/>
+            </div>
         )
     }
 }
