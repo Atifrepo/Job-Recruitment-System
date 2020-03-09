@@ -3,15 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.27",
+    "@fortawesome/free-solid-svg-icons": "^5.12.1",
+    "@fortawesome/react-fontawesome": "^0.1.8",
+    "@material-ui/core": "^4.9.5",
+    "@material-ui/icons": "latest",
+    "react-addons-pure-render-mixin": "latest",
+    "antd": "^4.0.1",
     "firebase": "^7.9.3",
     "material-ui": "^0.20.2",
     "react": "^16.13.0",
     "react-bootstrap": "^1.0.0-beta.17",
     "react-dom": "^16.13.0",
-    "react-scripts": "2.0.5",
-    "@material-ui/core": "^4.9.5",
+    "react-router": "latest",
     "react-router-dom": "^5.1.2",
-    "@material-ui/icons": "latest"
+    "react-scripts": "2.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -27,5 +34,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "react-addons-pure-render-mixin": "^15.6.2"
+  }
 }

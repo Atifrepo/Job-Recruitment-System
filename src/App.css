@@ -1,16 +1,35 @@
-.App {
-  text-align: center;
-}
+
 
 /* body{
   background-color:#757575;
 } */
 
 .App-header {
-  background-color:#212121;
-  height: 200px;
+  background-color: #001f57;
+  height: 80px;
   color: white;
   font-size: large;
+}
+
+
+
+nav{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  background: #0f1d28;
+  color: white;
+}
+
+.nav-links{
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+
+
 }
 
 .App-intro {

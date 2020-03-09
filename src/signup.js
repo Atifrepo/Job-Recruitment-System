@@ -5,6 +5,8 @@ import AppBar from 'material-ui/AppBar';
 import * as firebase from 'firebase';
 import './signup.css';
 import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
+import {Link} from "react-router-dom";
 
 class SignUp extends Component {
     constructor() {
@@ -21,7 +23,7 @@ class SignUp extends Component {
                 Contact_Number: '',
                 Passport_Number: '',
                 NIC_Number: '',
-                type: ''
+
 
             },
             fields: [],
@@ -45,11 +47,12 @@ class SignUp extends Component {
                 lName: this.state.myInfo.lName,
                 e_mail: this.state.myInfo.e_mail,
                 password: this.state.myInfo.password,
-                type: this.state.type
+
 
             });
 
         });
+        this.props.history.push("/")
 
 
     }
@@ -85,60 +88,58 @@ class SignUp extends Component {
 
     render() {
         return (
+            <Container component="main" maxWidth="xs">
 
-            <div>
-                <form>
-                    <div>
-                        <AppBar style={{ border:'5px solid gray' ,  backgroundColor: '#212121' }} title='Sign Up' />
-                        <div className='radioButton' onChange={this.SelectUserType.bind(this)} >
-                            <input type='radio' value='student' name='user' /> student
-                            <input type='radio' value='company' name='user' /> company
-                         {/* <input type='radio' value='Admin' name='user'  /> Admin  */}
+                <div>
+                    <form>
+                        <div>
+                            <AppBar style={{ border:'5px solid gray' ,  backgroundColor: '#212121' }} title='Sign Up' />
                         </div>
-                    </div>
 
-                    <TextField
-                        name="fName"
-                        hintText="First Name"
-                        floatingLabelText="First Name"
-                        value={this.state.myInfo.fName}
-                        onChange={this.inputChange.bind(this, "fName")}
-                        floatingLabelFixed
-                    />
-                    <br></br>
+                        <TextField
+                            name="fName"
+                            hintText="First Name"
+                            floatingLabelText="First Name"
+                            value={this.state.myInfo.fName}
+                            onChange={this.inputChange.bind(this, "fName")}
+                            floatingLabelFixed
+                        />
+                        <br></br>
 
-                    <TextField
-                        name="lName"
-                        hintText="Last Name"
-                        floatingLabelText="Last Name"
-                        value={this.state.myInfo.lName}
-                        onChange={this.inputChange.bind(this, "lName")}
-                        floatingLabelFixed
-                    />
-                    <br></br>
+                        <TextField
+                            name="lName"
+                            hintText="Last Name"
+                            floatingLabelText="Last Name"
+                            value={this.state.myInfo.lName}
+                            onChange={this.inputChange.bind(this, "lName")}
+                            floatingLabelFixed
+                        />
+                        <br></br>
 
-                    <TextField
-                        name="e_mail"
-                        hintText="e_mail"
-                        floatingLabelText="e_mail"
-                        value={this.state.myInfo.e_mail}
-                        onChange={this.inputChange.bind(this, "e_mail")}
-                        floatingLabelFixed
-                    />
-                    <br></br>
-                    <TextField
-                        name="password"
-                        hintText="Password"
-                        floatingLabelText="password"
-                        value={this.state.myInfo.password}
-                        onChange={this.inputChange.bind(this, "password")}
-                        type="password"
-                        floatingLabelFixed
-                    />
-                    <br></br>
-                    <Button  variant="contained" onClick={this.handleClick.bind(this)}><b>Sign Up</b></Button>
-                </form>
-            </div>
+                        <TextField
+                            name="e_mail"
+                            hintText="Email"
+                            floatingLabelText="Email"
+                            value={this.state.myInfo.e_mail}
+                            onChange={this.inputChange.bind(this, "e_mail")}
+                            floatingLabelFixed
+                        />
+                        <br></br>
+                        <TextField
+                            name="password"
+                            hintText="Password"
+                            floatingLabelText="password"
+                            value={this.state.myInfo.password}
+                            onChange={this.inputChange.bind(this, "password")}
+                            type="password"
+                            floatingLabelFixed
+                        />
+                        <br></br>
+                        <Button  variant="contained" onClick={this.handleClick.bind(this)}><b>Sign Up</b></Button>
+
+                    </form>
+                </div>
+            </Container>
         )
     }
 }

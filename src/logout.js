@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import SignUp from './signup'
+import ApplyJob from './ApplyJob'
 import * as firebase from 'firebase';
 import './logout.css';
 import {Redirect} from 'react-router-dom'

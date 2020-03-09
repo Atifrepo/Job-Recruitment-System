@@ -1,37 +1,33 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import StudentDetails from './StudentDetails';
-import ViewCompany from './ViewCompany'
-import ViewJobs from './ViewJobs';
 import './LeftPanelStudents.css';
-import {
-    BrowserRouter as Router,
-    Route,
-    Link
-} from 'react-router-dom';
-
+import {BrowserRouter as Router, Route, Redirect, Link} from 'react-router-dom';
+import JobList from "./Components/JobList";
+import JobListApply from "./Components/JobListApply";
+import Divider from "@material-ui/core/Divider";
+import Logout from "./logout";
 class LeftPanelStudents extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            user: null
+            user: 'guanzhou'
         }
     }
 
-    componentDidMount() {
-        firebase.auth().onAuthStateChanged(() => {
-
-            var userId = firebase.auth().currentUser.uid;
-            const rootRef = firebase.database().ref();
-            const speedRef = rootRef.child('USER/' + userId);
-            speedRef.on('value', snap => {
-                var userName = snap.val().fname
-                console.log(userName);
-                this.setState({ user: userName })
-            });
-        })
-    }
+    // componentDidMount() {
+    //     firebase.auth().onAuthStateChanged(() => {
+    //
+    //         var userId = firebase.auth().currentUser.uid;
+    //         const rootRef = firebase.database().ref();
+    //         const speedRef = rootRef.child('USER/' + userId);
+    //         speedRef.on('value', snap => {
+    //             var userName = snap.val().fname;
+    //             console.log(userName);
+    //             this.setState({ user: userName })
+    //         });
+    //     })
+    // }
 
     // StudentDetailss() {
     //     this.props.push('/StudentDetails');
@@ -47,30 +43,43 @@ class LeftPanelStudents extends Component {
 
     render() {
         return (
-            <Router>
-                <div style={{backgroundColor:'#BDBDBD'}}>
-                     {this.state.user?
-                    <div>
-                        <h1> Student </h1>
-                        <h2 style={{ color: '#212121' }}>{this.state.user}</h2>
-                        <p><Link className='link' to='/student/StudentDetails' > Student Details </Link></p>
-                       
-                        <p><Link className='link' to='/student/ViewJobs'>ViewJobs</Link> </p>
-                        <p><Link className='link' to='/student/ViewCompany'>ViewCompany</Link> </p>                        
+            <div>
+                <div >
 
-                    </div> 
+                     {this.state.user?
+                         <div>
+
+                             <div style={{backgroundColor:'#152938', height: 50}}>
+                                 <h2 style={{ color: '#FFFFFF' ,paddingLeft:'10px'}}>My Task: {this.state.user}</h2>
+
+                             </div>
+                             {/*<div style={{backgroundColor:'#152938', height: 50}}>*/}
+                             {/*    <h2><a href={'/postjob'}>Post New Job</a></h2>*/}
+                             {/*</div>*/}
+                             <div style={{margin:'auto', height:'auto', overflow:'auto',backgroundColor:'#1f3b51'}}>
+                                 <h3 style={{ color: '#FFFFFF' ,paddingLeft:'10px'}}>My Post</h3>
+                                 <Divider/>
+                                 <JobList/>
+                         </div>
+                             <div style={{margin:'auto', height:'auto', overflow:'auto',backgroundColor:'#4b6273'}}>
+                                 <h3 style={{ color: '#FFFFFF',paddingLeft:'10px'}}>My Application</h3>
+                                 <Divider/>
+                                 <JobListApply/>
+                             </div>
+
+                         </div>
+
+
                     :
-                    <h4>Login first!!!</h4>
+                         //if not log in, redirect to login page.
+                         <Redirect to="/"/>
                      }
-                    <Route path='/student/StudentDetails' component={StudentDetails} />
-                    <Route path='/student/ViewJobs' component={ViewJobs} />
-                    <Route path='/student/ViewCompany' component={ViewCompany} />
 
                    
 
                 </div>
-
-            </Router>
+                <Logout {...this.props}/>
+            </div>
         )
     }
 }

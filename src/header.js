@@ -3,23 +3,27 @@ import { Link } from 'react-router-dom'
 import Nav from './Nav';
 import Login from './login';
 import SideBar from './layout/sidebar';
+import NavLink from "react-bootstrap/NavLink";
 // The Header creates links that can be used to navigate
 // between routes.
-const Header = () => (
-  <header>
-    <nav>
-      <ul>
-        {/* <li ><Link to='/'>Home</Link></li> */}
-         {/* <li><Link to='/login'>login</Link></li> 
-         <li><Link to='/signup'>signup</Link></li>*/}
-         {/* <li><Link to='/Student'>student</Link></li>  */}
-          <Login />  
-        <Nav />
-        <SideBar />
+const navStyle = {
+    color:'white'
+};
 
-      </ul>
+const Header = () => (
+
+    <nav>
+        <Link style = {navStyle} to="/"><h3>JobHunter</h3></Link>
+        <ul className="nav-links">
+            <Link style = {navStyle} to="/market">
+                <li>Market</li>
+            </Link>
+            <Link style = {navStyle}  to="/student">
+                <li>My Task</li>
+            </Link>
+            <button style={{'background-color': '#fb601d'}}><NavLink href={'/postjob'}>Post Job</NavLink></button>
+        </ul>
     </nav>
-  </header>
 )
 
 export default Header
