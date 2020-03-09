@@ -32,26 +32,26 @@ class SignUp extends Component {
     }
 
     handleClick(event) {
-        firebase.auth().createUserWithEmailAndPassword(this.state.myInfo.e_mail, this.state.myInfo.password).catch(function (error) {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(errorMessage)
-        }).then(() => {
-
-            var uid = firebase.auth().currentUser.uid
-            console.log('we are here');
-            console.log(this.state.myInfo);
-            console.log(uid);
-            firebase.database().ref('USER' + '/' + uid).set({
-                fname: this.state.myInfo.fName,
-                lName: this.state.myInfo.lName,
-                e_mail: this.state.myInfo.e_mail,
-                password: this.state.myInfo.password,
-
-
-            });
-
-        });
+        // firebase.auth().createUserWithEmailAndPassword(this.state.myInfo.e_mail, this.state.myInfo.password).catch(function (error) {
+        //     var errorCode = error.code;
+        //     var errorMessage = error.message;
+        //     console.log(errorMessage)
+        // }).then(() => {
+        //
+        //     var uid = firebase.auth().currentUser.uid
+        //     console.log('we are here');
+        //     console.log(this.state.myInfo);
+        //     console.log(uid);
+        //     firebase.database().ref('USER' + '/' + uid).set({
+        //         fname: this.state.myInfo.fName,
+        //         lName: this.state.myInfo.lName,
+        //         e_mail: this.state.myInfo.e_mail,
+        //         password: this.state.myInfo.password,
+        //
+        //
+        //     });
+        //
+        // });
         this.props.history.push("/")
 
 

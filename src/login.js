@@ -30,25 +30,25 @@ class Login extends Component {
     }
 
     handleClick(event) {
-        firebase.auth().signInWithEmailAndPassword(this.state.myInfo.e_mail, this.state.myInfo.password).then((sucess, error) => {
-            // var errorCode = error.code;
-            // var errorMessage = error.message;
-            // if (errorCode === 'auth/wrong-password') {
-            //     alert('Wrong password.');
-            // } else {
-            //     alert(errorMessage);
+        // firebase.auth().signInWithEmailAndPassword(this.state.myInfo.e_mail, this.state.myInfo.password).then((sucess, error) => {
+        //     // var errorCode = error.code;
+        //     // var errorMessage = error.message;
+        //     // if (errorCode === 'auth/wrong-password') {
+        //     //     alert('Wrong password.');
+        //     // } else {
+        //     //     alert(errorMessage);
+        //
+        //     // var typeCheck;
+        //     // var userId = firebase.auth().currentUser.uid;
+        //     // const rootRef = firebase.database().ref();
+        //     // const speedRef = rootRef.child('USER/' + userId);
+        //     // speedRef.on('value', snap => {
+        //     //
+        //     //
+        //     //
+        //     // })
 
-            var typeCheck;
-            var userId = firebase.auth().currentUser.uid;
-            const rootRef = firebase.database().ref();
-            const speedRef = rootRef.child('USER/' + userId);
-            speedRef.on('value', snap => {
-
-                this.props.history.push('/market');
-
-            })
-
-
+            this.props.history.push('/market');
 
             // if (error) {
             //    console.log('error');
@@ -58,9 +58,9 @@ class Login extends Component {
             // }
             // // }
             // //alert('error', error,'sucess', sucess);
-        }).catch((error) => {
-            alert('invalid email or password', error);
-        })
+        // }).catch((error) => {
+        //     alert('invalid email or password', error);
+        // })
 
 
 
