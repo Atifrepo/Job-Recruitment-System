@@ -4,6 +4,7 @@ import * as firebase from 'firebase';
 import Logout from '../logout';
 import ContactList from "../Components/ContactList";
 import Divider from "@material-ui/core/Divider";
+import TaskDetails_detail from "../TaskDetails_detail";
 
 class JobSummary extends Component {
     constructor() {
@@ -90,7 +91,7 @@ class JobSummary extends Component {
                 : <div/>
             }
                 <Divider/>
-                <h2>This is where the Job Detail Goes with Job UID: {this.props.match.params.id}</h2>
+                <TaskDetails_detail id={this.props.match.params.id}/>
                 <Divider/>
             </div>
 

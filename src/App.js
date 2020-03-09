@@ -11,11 +11,17 @@ import Main from './main'
 import Student from './pages/Student'
 import SignUp from "./signup";
 import JobSummary from "./pages/JobSummary"
+import Market from "./Market";
 import {
     BrowserRouter as Router,
     Route,
     Link
 } from 'react-router-dom';
+import TaskDetails from "./TaskDetails";
+import PostJob from "./PostJob";
+import NavLink from "react-bootstrap/NavLink";
+import Nav from "./Nav";
+import SideBar from "./layout/sidebar";
 
 class App extends Component {
 
@@ -26,13 +32,8 @@ class App extends Component {
 
             <MuiThemeProvider>
                 <div className="App">
-                    <div className="App-header">
-                        <h2 id="titlename">Job Portal</h2>
-                        {/* <img id="HeaderImage" src="home/atif/hello-world/src//title.jpg" alt="logo"/>  */}
-                        {/* <img src="title.jpg" alt="logo" height="250" width="250" /> */}
-                    </div>
-
                     <Router>
+                        <Header/>
                         <div>
                             {/* <Route path='/loginnn' Component={Main} />  */}
                             <Route exact path='/' component={Login}/>
@@ -42,6 +43,9 @@ class App extends Component {
                             <Route path='/company' component={Company}/>
                             <Route path='/Admin' component={Admin}/>
                             <Route path='/JobSummary/:id' component={JobSummary}/>
+                            <Route path='/market' component={Market}/>
+                            <Route path='/jobdetail/:id' component={TaskDetails}/>
+                            <Route path='/postjob' component={PostJob}/>
                         </div>
 
 

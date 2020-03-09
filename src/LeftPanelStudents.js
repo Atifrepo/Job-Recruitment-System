@@ -51,9 +51,14 @@ class LeftPanelStudents extends Component {
 
                      {this.state.user?
                          <div>
+
                              <div style={{backgroundColor:'#152938', height: 50}}>
                                  <h2 style={{ color: '#FFFFFF' }}>{this.state.user}</h2>
+
                              </div>
+                             {/*<div style={{backgroundColor:'#152938', height: 50}}>*/}
+                             {/*    <h2><a href={'/postjob'}>Post New Job</a></h2>*/}
+                             {/*</div>*/}
                              <div style={{margin:'auto', height:'auto', overflow:'auto',backgroundColor:'#1f3b51'}}>
                                  <h3 style={{ color: '#FFFFFF' }}>My Post</h3>
                                  <Divider/>

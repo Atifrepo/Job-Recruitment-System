@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import TextField from 'material-ui/TextField'
-import {Link, Redirect} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import * as firebase from 'firebase';
 import AppBar from 'material-ui/AppBar/AppBar';
+import Container from '@material-ui/core/Container';
 
 class Login extends Component {
     constructor() {
@@ -20,77 +21,48 @@ class Login extends Component {
                 Contact_Number: '',
                 Passport_Number: '',
                 NIC_Number: '',
-                type: ''
+
 
             },
             fields: [],
             // error: 'this is error'
-            user: null
         }
     }
 
-    // componentDidMount() {
-    //     firebase.auth().onAuthStateChanged(() => {
-    //         var userId = firebase.auth().currentUser.uid;
-    //         const rootRef = firebase.database().ref();
-    //         const speedRef = rootRef.child('USER/' + userId);
-    //         speedRef.on('value', snap => {
-    //             var userName = snap.val().fname;
-    //             console.log(userName);
-    //             this.setState({ user: userName })
-    //         });
-    //     })
-    // }
-
     handleClick(event) {
-        this.props.history.push('/student');
-        // firebase.auth().signInWithEmailAndPassword(this.state.myInfo.e_mail, this.state.myInfo.password).then((sucess, error) => {
-        //     // var errorCode = error.code;
-        //     // var errorMessage = error.message;
-        //     // if (errorCode === 'auth/wrong-password') {
-        //     //     alert('Wrong password.');
-        //     // } else {
-        //     //     alert(errorMessage);
-        //
-        //     var typeCheck;
-        //     var userId = firebase.auth().currentUser.uid;
-        //     const rootRef = firebase.database().ref();
-        //     const speedRef = rootRef.child('USER/' + userId);
-        //     speedRef.on('value', snap => {
-        //         typeCheck = snap.val().type;
-        //         //console.log(typeCheck);
-        //
-        //         if (typeCheck == 'student') {
-        //
-        //             this.props.history.push('/student');
-        //             console.log("if k andr hun");
-        //         }
-        //         // console.log('Hello Student!');
-        //
-        //         if (typeCheck == 'company') {
-        //
-        //             this.props.history.push('/company');
-        //             console.log(typeCheck);
-        //         }
-        //         //console.log('hello Company');
-        //         if (typeCheck == 'Admin') {
-        //             this.props.history.push('/Admin');
-        //         }
-        //
-        //     })
+        firebase.auth().signInWithEmailAndPassword(this.state.myInfo.e_mail, this.state.myInfo.password).then((sucess, error) => {
+            // var errorCode = error.code;
+            // var errorMessage = error.message;
+            // if (errorCode === 'auth/wrong-password') {
+            //     alert('Wrong password.');
+            // } else {
+            //     alert(errorMessage);
+
+            var typeCheck;
+            var userId = firebase.auth().currentUser.uid;
+            const rootRef = firebase.database().ref();
+            const speedRef = rootRef.child('USER/' + userId);
+            speedRef.on('value', snap => {
+
+                this.props.history.push('/market');
+
+            })
 
 
-        // if (error) {
-        //    console.log('error');
-        // }
-        // if (sucess) {
-        //     console.log('success');
-        // }
-        // // }
-        // //alert('error', error,'sucess', sucess);
-        // }).catch((error) => {
-        //     alert('invalid email or password', error);
-        // })
+
+            // if (error) {
+            //    console.log('error');
+            // }
+            // if (sucess) {
+            //     console.log('success');
+            // }
+            // // }
+            // //alert('error', error,'sucess', sucess);
+        }).catch((error) => {
+            alert('invalid email or password', error);
+        })
+
+
 
 
     }
@@ -117,16 +89,15 @@ class Login extends Component {
 
     render() {
         return (
+            <Container component="main" maxWidth="xs">
 
-
-            <div>
-                {this.state.user === null ?
+                <div>
                     <form>
-                        <div>
-                            <AppBar style={{backgroundColor: '#212121'}} title='Login'></AppBar>
-                        </div>
+                        {/*<div>*/}
+                        {/*    <AppBar style={{ backgroundColor: '#212121' }} title='Login' ></AppBar>*/}
+                        {/*</div>*/}
                         <TextField
-                            name="e_mail"
+                            name="Email"
                             hintText="Email"
                             floatingLabelText="Email"
                             value={this.state.myInfo.e_mail}
@@ -149,27 +120,22 @@ class Login extends Component {
                         <br></br>
 
 
+
                         <Button variant="contained" onClick={(event) => this.handleClick(event)}><b>login</b></Button>
                         <Link to={{
                             pathname: '/Signup',
                             data: this.state.myInfo
 
-
                         }}>
-                            <Button variant="contained">Don't have account?</Button>
+                            <Button variant="contained" >Don't have account?</Button>
                         </Link>
                     </form>
-                    :
-                    // <div>{this.state.user}</div>
-                    <Redirect to="/student"/>
-                }
-
-            </div>
+                </div>
+            </Container>
 
         )
 
     }
 
 }
-
 export default Login

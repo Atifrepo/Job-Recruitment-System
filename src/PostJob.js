@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import AppBar from 'material-ui/AppBar';
 import * as firebase from 'firebase';
 import './signup.css';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import ApplyJobSuccess from "./ApplyJobSuccess.js";
+import PostJobSuccess from "./PostJobSuccess";
 
 const styles = theme => ({
     root: {
@@ -28,13 +29,13 @@ const styles = theme => ({
 });
 
 const DialogTitle = withStyles(styles)(props => {
-    const { children, classes, onClose, ...other } = props;
+    const {children, classes, onClose, ...other} = props;
     return (
         <MuiDialogTitle disableTypography className={classes.root} {...other}>
             <Typography variant="h6">{children}</Typography>
             {onClose ? (
                 <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-                    <CloseIcon />
+                    <CloseIcon/>
                 </IconButton>
             ) : null}
         </MuiDialogTitle>
@@ -54,7 +55,7 @@ const DialogActions = withStyles(theme => ({
     },
 }))(MuiDialogActions);
 
-class ApplyJob extends Component {
+class PostJob extends Component {
     constructor() {
         super();
         this.state = {
@@ -70,8 +71,8 @@ class ApplyJob extends Component {
                 Contact_Number: '',
                 Passport_Number: '',
                 NIC_Number: '',
-                type: ''
-
+                type: '',
+                expireDate: ''
             },
             fields: [],
             error: 'this is error'
@@ -117,6 +118,7 @@ class ApplyJob extends Component {
     componentDidMount() {
         console.log("Login Data is here ", this.props.location.data)
     }
+
     successMessage(event) {
 
         this.state.fields.push(this.state.myInfo);
@@ -136,6 +138,7 @@ class ApplyJob extends Component {
         });
 
     }
+
     SelectUserType(event) {
         this.setState({
             type: event.target.value
@@ -153,9 +156,9 @@ class ApplyJob extends Component {
                     {/*</div>*/}
 
                     <TextField
-                        name="Name"
-                        hintText="Full Name"
-                        floatingLabelText="Full Name"
+                        name="Title"
+                        hintText="Title"
+                        floatingLabelText="Title"
                         value={this.state.myInfo.Name}
                         onChange={this.inputChange.bind(this, "Name")}
                         floatingLabelFixed
@@ -181,8 +184,18 @@ class ApplyJob extends Component {
                         floatingLabelFixed
                     />
                     <br/>
+                    <TextField
+                        name="expireDate"
+                        hintText="expireDate"
+                        floatingLabelText="expireDate"
+                        value={this.state.myInfo.expireDate}
+                        onChange={this.inputChange.bind(this, "expireDate")}
+                        floatingLabelFixed
+                    />
+                    <br/>
                     <label className="mdc-text-field mdc-text-field--textarea">
-                        <label className="mdc-floating-label" id="my-label-id">Please Describe Yourself</label>
+                        <label className="mdc-floating-label" id="my-label-id">Please Describe Your Job and Your
+                            Requirement</label>
                         <br/>
                         <textarea aria-labelledby="my-label-id" rows="6" cols="30"/>
                         <div className="mdc-notched-outline">
@@ -193,10 +206,12 @@ class ApplyJob extends Component {
                         </div>
                     </label>
                     <br/><br/>
-                    <ApplyJobSuccess title="Submit" link="/market"/>
+                    <PostJobSuccess title="Submit" link="/market"/>
                 </form>
             </div>
 
-    )};
+        )
+    };
 }
-export default ApplyJob
+
+export default PostJob
