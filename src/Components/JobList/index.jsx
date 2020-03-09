@@ -16,7 +16,7 @@ class JobList extends React.Component {
         //const data = this.props.data
         const data =
             [
-                {   jobName: "help with my cat",
+                {   jobName: "Help with my cat",
                     id: "1",
                     status:"In Progress",
                 },
@@ -27,11 +27,12 @@ class JobList extends React.Component {
                 ]
 
         return (
-            <div className="comment-list">
+            <ul className="comment-list">
                 {data.map((item, index) => {
                     return <Item key={index} data={item}/>
                 })}
-            </div>
+            </ul>
+
         )
     }
 }

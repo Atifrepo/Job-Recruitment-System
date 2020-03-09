@@ -146,8 +146,8 @@ class ApplyJob extends Component {
     render() {
         return (
 
-            <div>
-                <form>
+            <div >
+                <form style={{'text-align': 'center'}}>
                     {/*<div>*/}
                     {/*    <AppBar style={{ border:'5px solid gray' ,  backgroundColor: '#212121' }} title='Sign Up' />*/}
                     {/*</div>*/}

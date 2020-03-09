@@ -87,7 +87,10 @@ render(){
                         Your Job has been Posted.
                     </Typography>
                     <Typography gutterBottom>
-                        The Job Hunter will contact you any minute!
+                        The Job Hunter will apply any minute!
+                    </Typography>
+                    <Typography gutterBottom>
+                        Check back later and contact your candidate for future actions.
                     </Typography>
                 </DialogContent>
                 <DialogActions>

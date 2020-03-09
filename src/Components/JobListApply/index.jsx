@@ -1,7 +1,7 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
-import Item from './Item'
+import Item from '../JobList/Item'
 
 import './style.less'
 
@@ -27,11 +27,11 @@ class JobListApply extends React.Component {
         }];
 
         return (
-            <div className="comment-list">
+            <ul className="comment-list">
                 {data.map((item, index) => {
                     return <Item key={index} data={item}/>
                 })}
-            </div>
+            </ul>
         )
     }
 }

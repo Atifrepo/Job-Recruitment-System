@@ -150,7 +150,7 @@ class PostJob extends Component {
         return (
 
             <div>
-                <form>
+                <form style={{'text-align': 'center'}}>
                     {/*<div>*/}
                     {/*    <AppBar style={{ border:'5px solid gray' ,  backgroundColor: '#212121' }} title='Sign Up' />*/}
                     {/*</div>*/}
@@ -206,7 +206,7 @@ class PostJob extends Component {
                         </div>
                     </label>
                     <br/><br/>
-                    <PostJobSuccess title="Submit" link="/market"/>
+                    <PostJobSuccess title="Submit" link="/jobSummary/1"/>
                 </form>
             </div>
 

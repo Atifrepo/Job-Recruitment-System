@@ -21,7 +21,7 @@ const Header = () => (
             <Link style = {navStyle}  to="/student">
                 <li>My Task</li>
             </Link>
-            <button style={{'background-color': '#fb601d'}}><NavLink href={'/student'}>Post Job</NavLink></button>
+            <button style={{'background-color': '#fb601d'}}><NavLink href={'/postjob'}>Post Job</NavLink></button>
         </ul>
     </nav>
 )
