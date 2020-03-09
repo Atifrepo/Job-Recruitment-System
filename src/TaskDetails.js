@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button'
 import './TaskDetails.css'
 import {Container} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
 import TaskDetails_detail from "./TaskDetails_detail";
 
 const fakeData = {

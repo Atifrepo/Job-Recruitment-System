@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField'
 import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
-import * as firebase from 'firebase';
-import AppBar from 'material-ui/AppBar/AppBar';
 import Container from '@material-ui/core/Container';
 
 class Login extends Component {

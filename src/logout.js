@@ -1,8 +1,6 @@
 import React,{Component} from 'react';
-import ApplyJob from './ApplyJob'
 import * as firebase from 'firebase';
 import './logout.css';
-import {Redirect} from 'react-router-dom'
 import { Button } from 'react-bootstrap';
  class Logout extends Component{
 

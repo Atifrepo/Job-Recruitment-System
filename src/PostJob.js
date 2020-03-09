@@ -1,18 +1,13 @@
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
-import AppBar from 'material-ui/AppBar';
-import * as firebase from 'firebase';
 import './signup.css';
 import {withStyles} from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-import ApplyJobSuccess from "./ApplyJobSuccess.js";
 import PostJobSuccess from "./PostJobSuccess";
 
 const styles = theme => ({
