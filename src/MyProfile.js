@@ -6,11 +6,11 @@ class Profile extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            firstName:"",
-            lastName:"",
-            email: "",
-            password: "",
-            phone: "",
+            firstName:"Guanzhou",
+            lastName:"Song",
+            email: "song@gmail.com",
+            password: "****",
+            phone: "1234567",
 
         };
     }
