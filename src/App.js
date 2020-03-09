@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Company from './pages/Company'
-import Admin from './pages/Admin'
 import logo from './logo.svg';
 import './App.css';
 import ApplyJob from './ApplyJob';
 import Login from './login';
 import Header from './header'
-import Main from './main'
 import Student from './pages/Student'
 import SignUp from "./signup";
 import JobSummary from "./pages/JobSummary"
@@ -30,6 +27,7 @@ class App extends Component {
         return (
 
 
+
             <MuiThemeProvider>
                 <div className="App">
                     <Router>
@@ -40,8 +38,6 @@ class App extends Component {
                             <Route path='/apply' component={ApplyJob}/>
                             <Route path='/student' component={Student}/>
                             <Route path='/SignUp' component={SignUp}/>
-                            <Route path='/company' component={Company}/>
-                            <Route path='/Admin' component={Admin}/>
                             <Route path='/JobSummary/:id' component={JobSummary}/>
                             <Route path='/market' component={Market}/>
                             <Route path='/jobdetail/:id' component={TaskDetails}/>
