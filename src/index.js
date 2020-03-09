@@ -1,8 +1,5 @@
 import React from 'react';
 import { render } from 'react-dom'
-//import injectTapEventPlugin from 'react-tap-event-plugin'; 
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom'
 import './index.css';
 import App from './App';
 import * as firebase from 'firebase';

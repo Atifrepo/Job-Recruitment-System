@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 //import { Button } from 'react-bootstrap';
 import AppBar from 'material-ui/AppBar';
-import * as firebase from 'firebase';
 import './signup.css';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-import {Link} from "react-router-dom";
 
 class SignUp extends Component {
     constructor() {

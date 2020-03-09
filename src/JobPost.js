@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
-// import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { Button } from 'react-bootstrap';
 import * as firebase from 'firebase';
-import ViewJobs from './ViewJobs';
 
 class JobPost extends Component {
     constructor() {

@@ -7,7 +7,6 @@ import TableCell from "@material-ui/core/TableCell";
 import Button from '@material-ui/core/Button'
 
 import './Market.css'
-import TaskDetails from "./TaskDetails";
 import Link from "@material-ui/core/Link";
 import {Container} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";

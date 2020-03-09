@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import logo from './logo.svg';
 import './App.css';
 import ApplyJob from './ApplyJob';
 import Login from './login';
@@ -12,7 +11,6 @@ import Market from "./Market";
 import {
     BrowserRouter as Router,
     Route,
-    Link
 } from 'react-router-dom';
 import TaskDetails from "./TaskDetails";
 import PostJob from "./PostJob";

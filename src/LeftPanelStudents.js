@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import * as firebase from 'firebase';
 import './LeftPanelStudents.css';
-import {BrowserRouter as Router, Route, Redirect, Link} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import JobList from "./Components/JobList";
 import JobListApply from "./Components/JobListApply";
 import Divider from "@material-ui/core/Divider";
