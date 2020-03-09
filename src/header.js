@@ -6,6 +6,7 @@ import SideBar from './layout/sidebar';
 import NavLink from "react-bootstrap/NavLink";
 // The Header creates links that can be used to navigate
 // between routes.
+
 const navStyle = {
     color:'white'
 };
@@ -21,7 +22,11 @@ const Header = () => (
             <Link style = {navStyle}  to="/student">
                 <li>My Task</li>
             </Link>
-            <button style={{'background-color': '#fb601d'}}><NavLink href={'/postjob'}>Post Job</NavLink></button>
+
+            <Link to='/postjob'>Post Job</Link>
+            <Link  to='/profile'>My Profile</Link>
+
+
         </ul>
     </nav>
 )
