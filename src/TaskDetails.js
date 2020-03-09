@@ -26,7 +26,7 @@ class TaskDetails extends Component {
                     <Paper elevation={5}>
                         <TaskDetails_detail id={0}/>
                                 <Button variant="contained" color="primary" href={'/apply'}>Apply</Button>
-                                <Button variant="contained" color="red" >Back</Button>
+                                <Button variant="contained" color="red" href={'/market'}>Back</Button>
 
                     </Paper>
                 </div>
