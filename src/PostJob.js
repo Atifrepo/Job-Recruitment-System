@@ -1,54 +1,7 @@
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import './signup.css';
-import {withStyles} from '@material-ui/core/styles';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import Typography from '@material-ui/core/Typography';
 import PostJobSuccess from "./PostJobSuccess";
-
-const styles = theme => ({
-    root: {
-        margin: 0,
-        padding: theme.spacing(2),
-    },
-    closeButton: {
-        position: 'absolute',
-        right: theme.spacing(1),
-        top: theme.spacing(1),
-        color: theme.palette.grey[500],
-    },
-});
-
-const DialogTitle = withStyles(styles)(props => {
-    const {children, classes, onClose, ...other} = props;
-    return (
-        <MuiDialogTitle disableTypography className={classes.root} {...other}>
-            <Typography variant="h6">{children}</Typography>
-            {onClose ? (
-                <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-                    <CloseIcon/>
-                </IconButton>
-            ) : null}
-        </MuiDialogTitle>
-    );
-});
-
-const DialogContent = withStyles(theme => ({
-    root: {
-        padding: theme.spacing(2),
-    },
-}))(MuiDialogContent);
-
-const DialogActions = withStyles(theme => ({
-    root: {
-        margin: 0,
-        padding: theme.spacing(1),
-    },
-}))(MuiDialogActions);
 
 class PostJob extends Component {
     constructor() {
@@ -74,54 +27,8 @@ class PostJob extends Component {
         }
     }
 
-    handleClick(event) {
-
-        // firebase.auth().createUserWithEmailAndPassword(this.state.myInfo.e_mail, this.state.myInfo.password).catch(function (error) {
-        //     var errorCode = error.code;
-        //     var errorMessage = error.message;
-        //     console.log(errorMessage)
-        // }).then(() => {
-        //
-        //     var uid = firebase.auth().currentUser.uid
-        //     console.log('we are here');
-        //     console.log(this.state.myInfo);
-        //     console.log(uid);
-        //     firebase.database().ref('USER' + '/' + uid).set({
-        //         fname: this.state.myInfo.fName,
-        //         lName: this.state.myInfo.lName,
-        //         e_mail: this.state.myInfo.e_mail,
-        //         password: this.state.myInfo.password,
-        //         type: this.state.type
-        //     });
-        //
-        // });
-    }
-
-    showModal = () => {
-        this.setState({
-            visible: true,
-        });
-    };
-
-    handleOk = e => {
-        console.log(e);
-        this.setState({
-            visible: false,
-        });
-    };
-
     componentDidMount() {
         console.log("Login Data is here ", this.props.location.data)
-    }
-
-    successMessage(event) {
-
-        this.state.fields.push(this.state.myInfo);
-        this.setState({
-            fields: this.state.fields
-        });
-        console.log('hi there', this.state.myInfo);
-        event.preventDefault();
     }
 
     inputChange(changeValue, event) {
@@ -134,22 +41,11 @@ class PostJob extends Component {
 
     }
 
-    SelectUserType(event) {
-        this.setState({
-            type: event.target.value
-        })
-        //console.log(this.state.type);
-    }
-
     render() {
         return (
 
             <div>
                 <form style={{'text-align': 'center'}}>
-                    {/*<div>*/}
-                    {/*    <AppBar style={{ border:'5px solid gray' ,  backgroundColor: '#212121' }} title='Sign Up' />*/}
-                    {/*</div>*/}
-
                     <TextField
                         name="Title"
                         hintText="Title"

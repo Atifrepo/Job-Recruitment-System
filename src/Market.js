@@ -60,9 +60,6 @@ class Market extends Component {
     }
 
 
-
-
-
     render() {
         return (
             <Container fixed>
@@ -70,8 +67,9 @@ class Market extends Component {
                     <hr/>
                     <h1 className="MarketHeader">Task Market</h1>
                     <label>
-                        <TextField id="filled-basic"  variant="filled" label={"Search task here"}/>
-                        <Button variant = "contained" color = "primary" size = "large" style = {{padding:"14.5px 5px"}} onClick={this.handleSearchClick}>Search</Button>
+                        <TextField id="filled-basic" variant="filled" label={"Search task here"}/>
+                        <Button variant="contained" color="primary" size="large" style={{padding: "14.5px 5px"}}
+                                onClick={this.handleSearchClick}>Search</Button>
                     </label>
 
 
@@ -88,7 +86,7 @@ class Market extends Component {
                             <TableBody>
                                 {
                                     tasksData.map(row => (
-                                        <TableRow key = {row.id}>
+                                        <TableRow key={row.id}>
                                             <TableCell align="left" component="th" scope="row">
                                                 <Link href={`/jobdetail/${row.id}`}>{row.taskTitle}</Link>
                                             </TableCell>
@@ -101,17 +99,6 @@ class Market extends Component {
                             </TableBody>
                         </Table>
                     </TableContainer>
-                    {/*<div className="MarketList">*/}
-                    {/*    {tasksData.map(item => (*/}
-                    {/*        <div key={item.id}>*/}
-                    {/*            <Link to={`/student/Market/${item.id}`}>Task: {item.taskTitle}</Link>*/}
-                    {/*            <div>Name: {item.userName}</div>*/}
-                    {/*            <hr/>*/}
-                    {/*        </div>*/}
-                    {/*    ))*/}
-                    {/*    }*/}
-                    {/*</div>*/}
-
                 </div>
             </Container>
         )

@@ -9,7 +9,7 @@ const fakeData = {
     salary: "20",
     details: "I am going to leave school next week and I need some one who loves cat to" +
         "take care of my cat"
-}
+};
 
 class TaskDetails_detail extends Component {
     render() {

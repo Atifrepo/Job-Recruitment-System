@@ -12,8 +12,6 @@ class JobListApply extends React.Component {
     }
 
     render() {
-        // 获取数据
-        //const data = this.props.data
         const data = [{
             jobName: "House Moving",
             id: "3",

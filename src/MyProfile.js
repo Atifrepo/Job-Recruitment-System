@@ -2,12 +2,12 @@ import React from 'react';
 import {Link} from "react-router-dom";
 
 
-class Profile extends React.Component{
-    constructor(props){
+class Profile extends React.Component {
+    constructor(props) {
         super(props);
         this.state = {
-            firstName:"Guanzhou",
-            lastName:"Song",
+            firstName: "Guanzhou",
+            lastName: "Song",
             email: "song@gmail.com",
             password: "****",
             phone: "1234567",
@@ -28,10 +28,10 @@ class Profile extends React.Component{
                                 <span className="mr-2">First Name</span>
                             </label>
                             <div className="col-sm-10">
-                                <input className="form-control"  id="username"
+                                <input className="form-control" id="username"
                                        value={this.state.firstName} placeholder="Mike"
                                        onChange={(event) => this.setState({firstName: event.target.value})
-                                }/>
+                                       }/>
                             </div>
                         </div>
                         <div className="form-group row">
@@ -42,7 +42,7 @@ class Profile extends React.Component{
                                 <input className="form-control" id="username"
                                        value={this.state.lastName} placeholder="Shah"
                                        onChange={(event) => this.setState({lastName: event.target.value})}
-                                       />
+                                />
                             </div>
                         </div>
 
@@ -54,7 +54,7 @@ class Profile extends React.Component{
                                 <input className="form-control" id="phone"
                                        value={this.state.phone} placeholder="(555) 123-4324"
                                        onChange={(event) => this.setState({phone: event.target.value})}
-                                       />
+                                />
                             </div>
                         </div>
                         <div className="form-group row">
@@ -65,7 +65,7 @@ class Profile extends React.Component{
                                 <input type="email" className="form-control" id="email"
                                        value={this.state.email} placeholder="alice@wonderland.com"
                                        onChange={(event) => this.setState({email: event.target.value})}
-                                       />
+                                />
                             </div>
                         </div>
 
@@ -81,7 +81,7 @@ class Profile extends React.Component{
                                                 lastName: this.state.lastName,
                                                 phone: this.state.phone,
                                                 email: this.state.email
-                                            })
+                                            });
                                             alert("Your profile has been updated")
                                         }}>
                                     Update
@@ -95,7 +95,8 @@ class Profile extends React.Component{
 
                                 <Link to={'/'}>
                                     <button className="btn  btn-block btn-danger"
-                                    > Logout </button>
+                                    > Logout
+                                    </button>
                                 </Link>
                             </div>
 
@@ -106,4 +107,5 @@ class Profile extends React.Component{
         );
     }
 }
+
 export default Profile;

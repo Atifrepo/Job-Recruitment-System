@@ -1,8 +1,9 @@
 import React from 'react';
-import { render } from 'react-dom'
+import {render} from 'react-dom'
 import './index.css';
 import App from './App';
 import * as firebase from 'firebase';
+
 var config = {
     apiKey: "AIzaSyDfzLK4_Ct2TB45Iwf8svzN140u0j7t3xs",
     authDomain: "jobhunter-6f17c.firebaseapp.com",
@@ -15,4 +16,4 @@ var config = {
 };
 firebase.initializeApp(config);
 
-render (<App/>, document.getElementById('root') );
+render(<App/>, document.getElementById('root'));

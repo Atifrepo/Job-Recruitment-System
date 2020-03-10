@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 //import { Button } from 'react-bootstrap';
 import AppBar from 'material-ui/AppBar';
@@ -21,8 +21,6 @@ class SignUp extends Component {
                 Contact_Number: '',
                 Passport_Number: '',
                 NIC_Number: '',
-
-
             },
             fields: [],
             error: 'this is error'
@@ -30,43 +28,12 @@ class SignUp extends Component {
     }
 
     handleClick(event) {
-        // firebase.auth().createUserWithEmailAndPassword(this.state.myInfo.e_mail, this.state.myInfo.password).catch(function (error) {
-        //     var errorCode = error.code;
-        //     var errorMessage = error.message;
-        //     console.log(errorMessage)
-        // }).then(() => {
-        //
-        //     var uid = firebase.auth().currentUser.uid
-        //     console.log('we are here');
-        //     console.log(this.state.myInfo);
-        //     console.log(uid);
-        //     firebase.database().ref('USER' + '/' + uid).set({
-        //         fname: this.state.myInfo.fName,
-        //         lName: this.state.myInfo.lName,
-        //         e_mail: this.state.myInfo.e_mail,
-        //         password: this.state.myInfo.password,
-        //
-        //
-        //     });
-        //
-        // });
         this.props.history.push("/")
-
-
     }
 
     componentDidMount() {
         console.log("Login Data is here ", this.props.location.data)
     }
-    // successMessage(event) {
-
-    //     this.state.fields.push(this.state.myInfo);
-    //     this.setState({
-    //         fields: this.state.fields
-    //     })
-    //     console.log('hi there', this.state.myInfo)
-    //     event.preventDefault();
-    // }
 
     inputChange(changeValue, event) {
 
@@ -77,12 +44,6 @@ class SignUp extends Component {
         });
 
     }
-    SelectUserType(event) {
-        this.setState({
-            type: event.target.value
-        })
-        //console.log(this.state.type);
-    }
 
     render() {
         return (
@@ -91,7 +52,7 @@ class SignUp extends Component {
                 <div>
                     <form>
                         <div>
-                            <AppBar style={{ border:'5px solid gray' ,  backgroundColor: '#212121' }} title='Sign Up' />
+                            <AppBar style={{border: '5px solid gray', backgroundColor: '#212121'}} title='Sign Up'/>
                         </div>
 
                         <TextField
@@ -133,7 +94,7 @@ class SignUp extends Component {
                             floatingLabelFixed
                         />
                         <br></br>
-                        <Button  variant="contained" onClick={this.handleClick.bind(this)}><b>Sign Up</b></Button>
+                        <Button variant="contained" onClick={this.handleClick.bind(this)}><b>Sign Up</b></Button>
 
                     </form>
                 </div>
@@ -141,4 +102,5 @@ class SignUp extends Component {
         )
     }
 }
+
 export default SignUp

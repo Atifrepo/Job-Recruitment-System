@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -8,7 +8,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-import { NavLink } from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 const styles = theme => ({
     root: {
@@ -24,13 +24,13 @@ const styles = theme => ({
 });
 
 const DialogTitle = withStyles(styles)(props => {
-    const { children, classes, onClose, ...other } = props;
+    const {children, classes, onClose, ...other} = props;
     return (
         <MuiDialogTitle disableTypography className={classes.root} {...other}>
             <Typography variant="h6">{children}</Typography>
             {onClose ? (
                 <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-                    <CloseIcon />
+                    <CloseIcon/>
                 </IconButton>
             ) : null}
         </MuiDialogTitle>
@@ -55,50 +55,48 @@ class ApplyJobSuccess extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            open:false
+            open: false
         }
     }
 
 
-
-     handleClickOpen = () => {
+    handleClickOpen = () => {
         this.setState({
             open: true
         })
     };
-     handleClose = () => {
-         this.setState({
-             open: false
-         });
+    handleClose = () => {
+        this.setState({
+            open: false
+        });
 
     };
-render(){
-    return (
-        <div>
-            <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-                {this.props.title}
-            </Button>
-            <Dialog onClose={this.handleClose} aria-labelledby="customized-dialog-title" open={this.state.open}>
-                <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
-                    Application Submitted
-                </DialogTitle>
-                <DialogContent dividers>
-                    <Typography gutterBottom>
-                        Your application has been submitted.
-                    </Typography>
-                    <Typography gutterBottom>
-                        The Job Poster will contact you any minute!
-                    </Typography>
-                </DialogContent>
-                <DialogActions>
-                    {/*<Button variant="outlined" autoFocus onClick={this.handleClose} color="blue" >*/}
-                        <NavLink className="btn btn-primary"  to={this.props.link}>OK</NavLink>
-                    {/*</Button>*/}
-                </DialogActions>
-            </Dialog>
-        </div>
-    );
-}
+
+    render() {
+        return (
+            <div>
+                <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+                    {this.props.title}
+                </Button>
+                <Dialog onClose={this.handleClose} aria-labelledby="customized-dialog-title" open={this.state.open}>
+                    <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
+                        Application Submitted
+                    </DialogTitle>
+                    <DialogContent dividers>
+                        <Typography gutterBottom>
+                            Your application has been submitted.
+                        </Typography>
+                        <Typography gutterBottom>
+                            The Job Poster will contact you any minute!
+                        </Typography>
+                    </DialogContent>
+                    <DialogActions>
+                        <NavLink className="btn btn-primary" to={this.props.link}>OK</NavLink>
+                    </DialogActions>
+                </Dialog>
+            </div>
+        );
+    }
 
 }
 

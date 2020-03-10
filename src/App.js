@@ -8,15 +8,9 @@ import Student from './pages/Student'
 import SignUp from "./signup";
 import JobSummary from "./pages/JobSummary"
 import Market from "./Market";
-import {
-    BrowserRouter as Router,
-    Route,
-} from 'react-router-dom';
+import {BrowserRouter as Router, Route,} from 'react-router-dom';
 import TaskDetails from "./TaskDetails";
 import PostJob from "./PostJob";
-import NavLink from "react-bootstrap/NavLink";
-import Nav from "./Nav";
-import SideBar from "./layout/sidebar";
 import Profile from "./MyProfile"
 
 class App extends Component {
@@ -26,13 +20,11 @@ class App extends Component {
         return (
 
 
-
             <MuiThemeProvider>
                 <div className="App">
                     <Router>
                         <Header/>
                         <div>
-                            {/* <Route path='/loginnn' Component={Main} />  */}
                             <Route exact path='/' component={Login}/>
                             <Route path='/apply' component={ApplyJob}/>
                             <Route path='/student' component={Student}/>
