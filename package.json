@@ -33,10 +33,7 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "devDependencies": {
-    "react-addons-pure-render-mixin": "^15.6.2"
-  },
   "engines": {
-    "node": "12.x"
+    "node": "12.1.0"
   }
 }
