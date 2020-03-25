@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import * as firebase from 'firebase';
 import ContactList from "../Components/ContactList";
 import Divider from "@material-ui/core/Divider";
 import TaskDetails_detail from "../TaskDetails_detail";

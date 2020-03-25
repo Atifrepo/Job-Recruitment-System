@@ -5,7 +5,7 @@ import './style.less'
 import {NavLink} from "react-bootstrap";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUserClock} from '@fortawesome/free-solid-svg-icons'
-import {Divider} from "antd";
+import Divider from '@material-ui/core/Divider';
 
 class JobItem extends React.Component {
     constructor(props, context) {
