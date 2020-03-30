@@ -10,10 +10,7 @@ const Header = () => (
     <nav>
         <Link style={navStyle} to="/"><h3>JobHunter</h3></Link>
         <ul className="nav-links">
-
-            <Link style={navStyle} style={{'color': '#fb601d'}} to="/postjob">
-                <li>Post Job</li>
-            </Link>
+            <button style={{'background-color': '#fb601d'}}><NavLink href={'/postjob'}>Post Job</NavLink></button>
             <Link style={navStyle} to="/market">
                 <li>Market</li>
             </Link>
