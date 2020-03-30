@@ -24,7 +24,7 @@ class JobItem extends React.Component {
                         <FontAwesomeIcon icon={faUserClock}/> : ''} </NavLink>
                 </h3>
                 <p style={{color: '#FFFFFF', paddingLeft: '40px'}}>Status: {item.status}</p>
-                <Divider orientation="left"> </Divider>
+                <Divider/>
             </li>
         )
     }
