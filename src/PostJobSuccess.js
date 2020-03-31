@@ -10,6 +10,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import {NavLink} from 'react-router-dom'
 import {auth, database} from "./firebase";
+import {validate} from "validate.js";
+import moment from 'moment';
 
 const styles = theme => ({
     root: {
@@ -51,6 +53,31 @@ const DialogActions = withStyles(theme => ({
     },
 }))(MuiDialogActions);
 
+
+let  constraints = {
+    title: {
+        presence: true
+    },
+    phone: {
+        length: {is: 10},
+        presence: true
+    },
+    e_mail: {
+        presence: true,
+        email:true
+    },
+    startDate: {
+        datetime: {
+            dateOnly: false,
+            earliest: new Date(),
+            message: " is Invalid."
+        }
+    },
+    desc: {
+        presence: true
+    }
+}
+
 class PostJobSuccess extends React.Component {
     constructor(props) {
         super(props);
@@ -60,25 +87,40 @@ class PostJobSuccess extends React.Component {
         }
     }
 
-
     handleClickOpen = () => {
         let currentComponent = this;
-        console.log(this.props.data);
-        let newPostKey = database.ref().child('tasks').push().key;
-        let updates = {};
-        updates['/tasks/' + newPostKey] = this.props.data;
-        updates['/user-tasks/' + auth.currentUser.uid + '/' + newPostKey] = this.props.data;
-        database.ref().update(updates, function (error) {
-            if (error) {
-                alert("Something went wrong, please try again");
-            } else {
-                // Data saved successfully!
-                currentComponent.setState({
-                    taskId: newPostKey,
-                    open: true
-                })
+        validate.extend(validate.validators.datetime, {
+            // The value is guaranteed not to be null or undefined but otherwise it
+            // could be anything.
+            parse: function(value, options) {
+                return +moment.utc(value);
+            },
+            // Input is a unix timestamp
+            format: function(value, options) {
+                var format = options.dateOnly ? "YYYY-MM-DD" : "YYYY-MM-DD hh:mm:ss";
+                return moment.utc(value).format(format);
             }
         });
+        console.log(this.props.data);
+        if(validate(this.props.data, constraints)){
+            console.log(validate(this.props.data, constraints))
+        }else {
+            let newPostKey = database.ref().child('tasks').push().key;
+            let updates = {};
+            updates['/tasks/' + newPostKey] = this.props.data;
+            updates['/user-tasks/' + auth.currentUser.uid + '/' + newPostKey] = this.props.data;
+            database.ref().update(updates, function (error) {
+                if (error) {
+                    alert("Something went wrong, please try again");
+                } else {
+                    // Data saved successfully!
+                    currentComponent.setState({
+                        taskId: newPostKey,
+                        open: true
+                    })
+                }
+            });
+        };
     };
 
     handleClose = () => {

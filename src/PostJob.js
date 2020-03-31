@@ -4,7 +4,6 @@ import DatePicker from 'material-ui/DatePicker'
 import './signup.css';
 import PostJobSuccess from "./PostJobSuccess";
 import {auth, database} from './firebase';
-import {Redirect} from "react-router-dom";
 
 class PostJob extends Component {
     constructor() {
@@ -12,16 +11,17 @@ class PostJob extends Component {
         this.state = {
             visible: false,
             myInfo: {
-                title:'',
+                title: null,
                 phone: auth.currentUser.phoneNumber,
                 e_mail: auth.currentUser.email,
-                startDate: '',
-                desc:''
+                startDate: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000),
+                desc: null
             },
             currentUser: {},
             fields: [],
             error: 'this is error'
         }
+
 
         this.userRef = database.ref('/users').child('Anonymous');
 
@@ -30,8 +30,6 @@ class PostJob extends Component {
     componentDidMount() {
         auth.onAuthStateChanged((currentUser) => {
             this.setState({currentUser: auth.currentUser || {}});
-
-
         });
 
     }
@@ -46,13 +44,12 @@ class PostJob extends Component {
 
     }
 
-    handleDateChange(e, date){
+    handleDateChange(e, date) {
         this.state.myInfo.startDate = date;
         this.setState({
             myInfo: this.state.myInfo
         });
     }
-
 
 
     render() {
@@ -63,7 +60,7 @@ class PostJob extends Component {
                         name="Title"
                         hintText="Title"
                         floatingLabelText="Title"
-                        value={this.state.myInfo.title}
+                        defaultValue={this.state.myInfo.title}
                         onChange={this.inputChange.bind(this, "title")}
                         floatingLabelFixed
                     />
@@ -73,7 +70,7 @@ class PostJob extends Component {
                         name="Phone"
                         hintText="Phone"
                         floatingLabelText="Phone"
-                        value={auth.currentUser.phoneNumber}
+                        defaultValue={this.state.myInfo.phone}
                         onChange={this.inputChange.bind(this, "phone")}
                         floatingLabelFixed
                     />
@@ -83,7 +80,7 @@ class PostJob extends Component {
                         name="Email"
                         hintText="Email"
                         floatingLabelText="Email"
-                        value={auth.currentUser.email}
+                        defaultValue={this.state.myInfo.e_mail}
                         onChange={this.inputChange.bind(this, "e_mail")}
                         floatingLabelFixed
                     />
@@ -92,6 +89,7 @@ class PostJob extends Component {
                         name="Start Date"
                         hintText="Start Date"
                         floatingLabelText="Start Date"
+                        //TODO: default set 7 days?
                         value={this.state.myInfo.startDate}
                         onChange={this.handleDateChange.bind(this)}
                         floatingLabelFixed
@@ -101,7 +99,8 @@ class PostJob extends Component {
                         <label className="mdc-floating-label" id="my-label-id">Please Describe Your Job and Your
                             Requirement</label>
                         <br/>
-                        <textarea aria-labelledby="my-label-id" rows="10" cols="50" onChange={this.inputChange.bind(this,'desc')}/>
+                        <textarea aria-labelledby="my-label-id" rows="10" cols="50"
+                                  onChange={this.inputChange.bind(this, 'desc')}/>
                         <div className="mdc-notched-outline">
                             <div className="mdc-notched-outline__leading"/>
                             <div className="mdc-notched-outline__notch">
@@ -111,6 +110,7 @@ class PostJob extends Component {
                     </label>
                     <br/><br/>
                     <PostJobSuccess data={this.state.myInfo} title="Submit"/>
+                    <br/><br/><br/><br/>
                 </form>
             </div>
 
