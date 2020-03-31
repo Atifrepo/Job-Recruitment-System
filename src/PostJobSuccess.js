@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import {NavLink} from 'react-router-dom'
+import {auth, database} from "./firebase";
 
 const styles = theme => ({
     root: {
@@ -50,27 +51,43 @@ const DialogActions = withStyles(theme => ({
     },
 }))(MuiDialogActions);
 
-
 class PostJobSuccess extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: false
+            open: false,
+            taskId: null
         }
     }
 
 
     handleClickOpen = () => {
-        this.setState({
-            open: true
-        })
+        let currentComponent = this;
+        console.log(this.props.data);
+        let newPostKey = database.ref().child('tasks').push().key;
+        let updates = {};
+        updates['/tasks/' + newPostKey] = this.props.data;
+        updates['/user-tasks/' + auth.currentUser.uid + '/' + newPostKey] = this.props.data;
+        database.ref().update(updates, function (error) {
+            if (error) {
+                alert("Something went wrong, please try again");
+            } else {
+                // Data saved successfully!
+                currentComponent.setState({
+                    taskId: newPostKey,
+                    open: true
+                })
+            }
+        });
     };
+
     handleClose = () => {
         this.setState({
             open: false
         });
 
     };
+
 
     render() {
         return (
@@ -94,7 +111,7 @@ class PostJobSuccess extends React.Component {
                         </Typography>
                     </DialogContent>
                     <DialogActions>
-                        <NavLink className="btn btn-primary" to={this.props.link}>OK</NavLink>
+                        <NavLink className="btn btn-primary" to={"/jobSummary/" + this.state.taskId}>OK</NavLink>
                     </DialogActions>
                 </Dialog>
             </div>

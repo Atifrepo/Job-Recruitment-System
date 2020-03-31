@@ -19,8 +19,6 @@ class Login extends Component {
                 Contact_Number: '',
                 Passport_Number: '',
                 NIC_Number: '',
-
-
             },
             fields: [],
             // error: 'this is error'
