@@ -14,6 +14,7 @@ class PostJob extends Component {
                 title: null,
                 phone: auth.currentUser.phoneNumber,
                 e_mail: auth.currentUser.email,
+                reward:0,
                 startDate: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000),
                 desc: null
             },
@@ -36,18 +37,19 @@ class PostJob extends Component {
 
 
     inputChange(changeValue, event) {
-        this.state.myInfo[changeValue] = event.target.value;
-        console.log('event', event.target.value);
+        let info = this.state.myInfo;
+        info[changeValue] = event.target.value;
         this.setState({
-            myInfo: this.state.myInfo
+            myInfo: info
         });
 
     }
 
     handleDateChange(e, date) {
-        this.state.myInfo.startDate = date;
+        let info = this.state.myInfo;
+        info.startDate = date;
         this.setState({
-            myInfo: this.state.myInfo
+            myInfo: info
         });
     }
 
@@ -84,6 +86,14 @@ class PostJob extends Component {
                         onChange={this.inputChange.bind(this, "e_mail")}
                         floatingLabelFixed
                     />
+                    <br/>
+                    <TextField
+                    name="Reward(Optional)"
+                    hintText="$"
+                    floatingLabelText="Reward(Optional)"
+                    onChange={this.inputChange.bind(this, "reward")}
+                    floatingLabelFixed
+                />
                     <br/>
                     <DatePicker
                         name="Start Date"

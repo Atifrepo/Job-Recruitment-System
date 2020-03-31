@@ -53,18 +53,26 @@ const DialogActions = withStyles(theme => ({
     },
 }))(MuiDialogActions);
 
-
 let  constraints = {
     title: {
         presence: true
     },
     phone: {
         length: {is: 10},
+        numericality: {
+            onlyInteger: true
+        },
         presence: true
     },
     e_mail: {
         presence: true,
         email:true
+    },
+    reward:{
+        numericality: {
+            onlyInteger: true
+        },
+        presence: true
     },
     startDate: {
         datetime: {
@@ -102,13 +110,21 @@ class PostJobSuccess extends React.Component {
             }
         });
         console.log(this.props.data);
-        if(validate(this.props.data, constraints)){
-            console.log(validate(this.props.data, constraints))
+        let alertMsg = validate(this.props.data, constraints);
+        console.log(alertMsg);
+        if(alertMsg){
+            let res = "";
+            for(let key of Object.keys(alertMsg)){
+                res += (alertMsg[key][0] + '\n');
+            }
+            res += "Please verify your input.";
+            alert(res);
         }else {
-            let newPostKey = database.ref().child('tasks').push().key;
+            let newPostKey = database.ref().child('task').push().key;
             let updates = {};
-            updates['/tasks/' + newPostKey] = this.props.data;
-            updates['/user-tasks/' + auth.currentUser.uid + '/' + newPostKey] = this.props.data;
+            updates['/task/' + newPostKey] = this.props.data;
+            updates['/user-task/' + auth.currentUser.uid + '/' + newPostKey] = this.props.data;
+            updates['/task-applicant/' + newPostKey] = this.props.data;
             database.ref().update(updates, function (error) {
                 if (error) {
                     alert("Something went wrong, please try again");
@@ -120,7 +136,7 @@ class PostJobSuccess extends React.Component {
                     })
                 }
             });
-        };
+        }
     };
 
     handleClose = () => {

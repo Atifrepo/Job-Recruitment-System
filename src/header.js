@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {auth, database, googleAuthProvider} from './firebase';
+import {auth, database} from './firebase';
 import {Link} from 'react-router-dom'
 
 const navStyle = {

@@ -24,16 +24,16 @@ class LeftPanelStudents extends Component {
                         <div>
 
                             <div style={{backgroundColor: '#152938', height: 50}}>
-                                <h2 style={{color: '#FFFFFF', paddingLeft: '10px'}}>My Task: {this.state.user}</h2>
+                                <h2 style={{color: '#FFFFFF', paddingLeft: '10px'}}>My Task</h2>
 
                             </div>
                             <div style={{margin: 'auto', height: 'auto', overflow: 'auto', backgroundColor: '#1f3b51'}}>
-                                <h3 style={{color: '#FFFFFF', paddingLeft: '10px'}}>My Post</h3>
+                                <h3 style={{color: '#FFFFFF', paddingLeft: '30px'}}>My Post</h3>
                                 <Divider/>
                                 <JobList/>
                             </div>
                             <div style={{margin: 'auto', height: 'auto', overflow: 'auto', backgroundColor: '#4b6273'}}>
-                                <h3 style={{color: '#FFFFFF', paddingLeft: '10px'}}>My Application</h3>
+                                <h3 style={{color: '#FFFFFF', paddingLeft: '30px'}}>My Application</h3>
                                 <Divider/>
                                 <JobListApply/>
                             </div>

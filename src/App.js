@@ -28,14 +28,14 @@ class App extends Component {
                             <Route path='/' component={App}>
                                 <Route exact path='/' component={Market}/>
                                 <Route path='/login' component={Login2}/>
-                                <Route path='/apply' component={ApplyJob}/>
-                                <Route path='/student' component={Student}/>
-                                <Route path='/SignUp' component={SignUp}/>
-                                <Route path='/JobSummary/:id' component={JobSummary}/>
-                                <Route path='/market' component={Market}/>
+                                <Route path='/apply/:id' component={ApplyJob}/>
+                                <PrivateRoute path='/student' component={Student}/>
+                                <PrivateRoute path='/SignUp' component={SignUp}/>
+                                <PrivateRoute path='/JobSummary/:id' component={JobSummary}/>
+                                <PrivateRoute path='/market' component={Market}/>
                                 <Route path='/jobdetail/:id' component={TaskDetails}/>
                                 <PrivateRoute path='/postjob' component={PostJob}/>
-                                <Route path="/profile" component={Profile}/>
+                                <PrivateRoute path="/profile" component={Profile}/>
                             </Route>
                         </div>
 

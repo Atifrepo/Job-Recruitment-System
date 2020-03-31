@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import './signup.css';
 import ApplyJobSuccess from "./ApplyJobSuccess.js";
+import {auth, database} from "./firebase";
 
 
 class ApplyJob extends Component {
@@ -10,34 +11,41 @@ class ApplyJob extends Component {
         this.state = {
             visible: false,
             myInfo: {
-                fName: '',
-                lName: '',
-                e_mail: '',
-                password: '',
-                cPassword: '',
-                country: '',
-                city: '',
-                Contact_Number: '',
-                Passport_Number: '',
-                NIC_Number: '',
-                type: ''
-
+                name: null,
+                phone: null,
+                e_mail: null,
+                desc: null
             },
+            currentUser: {},
             fields: [],
             error: 'this is error'
         }
+
+
+        this.userRef = database.ref('/users').child('Anonymous');
+
     }
 
     componentDidMount() {
-        console.log("Login Data is here ", this.props.location.data)
+        auth.onAuthStateChanged((currentUser) => {
+            this.setState({currentUser: auth.currentUser || {}});
+            this.setState({
+                myInfo: {
+                    name: auth.currentUser.displayName,
+                    phone: auth.currentUser.phoneNumber,
+                    e_mail: auth.currentUser.email,
+                    desc: null
+                }
+            })
+        });
     }
 
-    inputChange(changeValue, event) {
 
-        this.state.myInfo[changeValue] = event.target.value;
-        console.log('event', event.target.value);
+    inputChange(changeValue, event) {
+        let info = this.state.myInfo;
+        info[changeValue] = event.target.value;
         this.setState({
-            myInfo: this.state.myInfo
+            myInfo: info
         });
 
     }
@@ -49,10 +57,10 @@ class ApplyJob extends Component {
                 <form style={{'text-align': 'center'}}>
                     <TextField
                         name="Name"
-                        hintText="Full Name"
+                        hintText="Name"
                         floatingLabelText="Full Name"
-                        value={this.state.myInfo.Name}
-                        onChange={this.inputChange.bind(this, "Name")}
+                        value={this.state.myInfo.name}
+                        onChange={this.inputChange.bind(this, "name")}
                         floatingLabelFixed
                     />
                     <br/>
@@ -62,15 +70,15 @@ class ApplyJob extends Component {
                         hintText="Phone"
                         floatingLabelText="Phone"
                         value={this.state.myInfo.phone}
-                        onChange={this.inputChange.bind(this, "Phone")}
+                        onChange={this.inputChange.bind(this, "phone")}
                         floatingLabelFixed
                     />
                     <br/>
 
                     <TextField
-                        name="e_mail"
-                        hintText="e_mail"
-                        floatingLabelText="e_mail"
+                        name="Email"
+                        hintText="Email"
+                        floatingLabelText="Email"
                         value={this.state.myInfo.e_mail}
                         onChange={this.inputChange.bind(this, "e_mail")}
                         floatingLabelFixed
@@ -79,7 +87,7 @@ class ApplyJob extends Component {
                     <label className="mdc-text-field mdc-text-field--textarea">
                         <label className="mdc-floating-label" id="my-label-id">Please Describe Yourself</label>
                         <br/>
-                        <textarea aria-labelledby="my-label-id" rows="6" cols="30"/>
+                        <textarea aria-labelledby="my-label-id" onChange={this.inputChange.bind(this, "desc")} rows="10" cols="50"/>
                         <div className="mdc-notched-outline">
                             <div className="mdc-notched-outline__leading"/>
                             <div className="mdc-notched-outline__notch">
@@ -88,7 +96,7 @@ class ApplyJob extends Component {
                         </div>
                     </label>
                     <br/><br/>
-                    <ApplyJobSuccess title="Submit" link="/market"/>
+                    <ApplyJobSuccess data={this.props.myInfo} id={this.props.match.params.id} title="Submit" link="/student"/>
                 </form>
             </div>
 
