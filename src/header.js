@@ -21,7 +21,6 @@ class Header extends Component {
     componentDidMount() {
         auth.onAuthStateChanged((currentUser) => {
             this.setState({currentUser: currentUser || {}});
-            console.log(currentUser);
             if (currentUser) {
                 // Init current user Refs
                 this.userRef = database.ref('/users').child(currentUser.uid);
@@ -38,7 +37,7 @@ class Header extends Component {
         });
     }
 
-    render() {
+     render() {
         return (
             <nav>
                 <Link style={navStyle} to="/"><h3>JobHunter</h3></Link>

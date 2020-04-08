@@ -5,9 +5,9 @@ import Redirect from "react-router-dom/es/Redirect";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
 
-        <Route {...rest} render={(props) => (
+        <Route  {...rest} render={(props) => (
             auth.currentUser
-            ? <Component {...props} />
+            ? <Component exact {...props} />
             : <Redirect to='/login' />
     )} />
 );

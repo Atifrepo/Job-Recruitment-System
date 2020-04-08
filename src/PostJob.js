@@ -16,7 +16,8 @@ class PostJob extends Component {
                 e_mail: auth.currentUser.email,
                 reward:0,
                 startDate: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000),
-                desc: null
+                desc: null,
+                postDate: new Date(new Date().getTime())
             },
             currentUser: {},
             fields: [],

@@ -85,6 +85,7 @@ class ApplyJobSuccess extends React.Component {
 
     handleClickOpen = () => {
         let currentComponent = this;
+        console.log(this.props.data)
         let alertMsg = validate(this.props.data, constraints);
         console.log(alertMsg);
         if(alertMsg){
@@ -95,12 +96,15 @@ class ApplyJobSuccess extends React.Component {
             res += "Please verify your input.";
             alert(res);
         }else {
-            let taskId = this.props.match.params.id;
+            let taskId = this.props.id;
+            let data  = this.props.data;
+            data['task_id'] = taskId;
+            data['status'] = "2.1";
             let newAppKey = database.ref().child('applicant').push().key;
             let updates = {};
-            updates['/applicant/' + newAppKey] = this.props.data;
-            updates['/task-applicant/' + taskId+'/' +newAppKey] = this.props.data;
-            updates['/user-applicant/' + auth.currentUser.uid + '/' + newAppKey] = this.props.data;
+            updates['/applicant/' + newAppKey] = data;
+            updates['/task-applicant/' + taskId+'/' +newAppKey] = data;
+            updates['/user-applicant/' + auth.currentUser.uid + '/' + newAppKey] = data;
             database.ref().update(updates, function (error) {
                 if (error) {
                     alert("Something went wrong, please try again");

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import LeftPanelStudents from '../LeftPanelStudents';
+import {auth, database} from "../firebase";
 
 class Student extends Component {
     constructor() {
@@ -9,10 +10,12 @@ class Student extends Component {
         }
     }
 
+
+
     render() {
         return (
             <div>
-                <LeftPanelStudents {...this.props}/>
+                <LeftPanelStudents {...this.props} />
             </div>
         );
     }

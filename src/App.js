@@ -22,7 +22,7 @@ class App extends Component {
 
             <MuiThemeProvider>
                 <div className="App">
-                    <Router>
+                    <Router history={this.props.history}>
                         <Header/>
                         <div>
                             <Route path='/' component={App}>

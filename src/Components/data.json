@@ -1,0 +1,290 @@
+{
+  "USER" : {
+    "651rl2AyqQYkl9c320bKrTEYYAZ2" : {
+      "e_mail" : "",
+      "fname" : "",
+      "lName" : "",
+      "password" : ""
+    },
+    "87PvaiJdvaPQ22jBpvtY1UDkHDC3" : {
+      "e_mail" : "test@test.com",
+      "fname" : "",
+      "lName" : "",
+      "password" : "123456"
+    },
+    "8nzLzG8VkSWC1uIpRSlEWVOohhx1" : {
+      "e_mail" : "hhh@gmail.com",
+      "fname" : "1234567",
+      "lName" : "",
+      "password" : "1234567",
+      "type" : "student"
+    },
+    "AITaAZlSXUbjkeT7HHYNqnesppj2" : {
+      "e_mail" : "f@f.com",
+      "fname" : "fff",
+      "lName" : "lll",
+      "password" : "1223456",
+      "type" : "company"
+    },
+    "Eui2aXDFp8a4MAHm9UlbB1RFNKf1" : {
+      "e_mail" : "huan@gmail.com",
+      "fname" : "hua",
+      "lName" : "huang",
+      "password" : "huan1234"
+    },
+    "L73TOOX2PETkHl1GFLMF95L3zGF3" : {
+      "e_mail" : "",
+      "fname" : "",
+      "lName" : "",
+      "password" : ""
+    },
+    "OUhvGoZg0MQ93jVivIi3lQsPgXD3" : {
+      "e_mail" : "huang1@gmail.com",
+      "fname" : "hua",
+      "lName" : "huan",
+      "password" : "123456",
+      "type" : "student"
+    },
+    "TiaZzhN70aVNVbQI5QxbMBa7Xvk1" : {
+      "e_mail" : "e@e.com",
+      "fname" : "fn",
+      "lName" : "ln",
+      "password" : "123456",
+      "type" : "student"
+    },
+    "YqfzYGHCPWdsSElbM0bN66bj2st1" : {
+      "e_mail" : "hua@gmail.com",
+      "fname" : "12345",
+      "lName" : "12345",
+      "password" : "123456",
+      "type" : "student"
+    },
+    "bq0iWWQHhzXI2LCVR4LnUkQ0thq2" : {
+      "DegreeTitle" : "",
+      "Division" : "",
+      "EnrollmentNumber" : "",
+      "FromDate" : "",
+      "GPA" : "",
+      "Name" : "",
+      "ToDate" : "",
+      "UniversityName" : "",
+      "e_mail" : "huang@gmail.com",
+      "fname" : "hua",
+      "lName" : "hua",
+      "password" : "hua1234"
+    },
+    "eXf4SLw2pFhjuxVgpUZTe2Hxp7q2" : {
+      "e_mail" : "",
+      "fname" : "",
+      "lName" : "",
+      "password" : ""
+    },
+    "kAY7QT7AaHWGu3MWUlmwDdQf6tS2" : {
+      "e_mail" : "ab@gmail.com",
+      "fname" : "a",
+      "lName" : "b",
+      "password" : "abcdef"
+    },
+    "oM1hXUajkSa7p6IUmD7tGpiA81a2" : {
+      "e_mail" : "ab@gmail.com",
+      "fname" : "a",
+      "lName" : "b",
+      "password" : "abcdef"
+    },
+    "r7wSFFybZtYIShcZDYjWnEApxKm1" : {
+      "e_mail" : "abcdef@gmail.com",
+      "fname" : "abcde",
+      "lName" : "abcde",
+      "password" : "abcdefg"
+    },
+    "tyqkqgl568ZZ8LbbJ6YpokS3pBd2" : {
+      "e_mail" : "a.a@a.com",
+      "fname" : "guanzhou",
+      "lName" : "song",
+      "password" : "123456",
+      "type" : "student"
+    },
+    "vy71R3fNR9RPk07JZgIMze1Bkpo1" : {
+      "e_mail" : "cathy@gmail.com",
+      "fname" : "cathy",
+      "lName" : "cathy",
+      "password" : "cathy1234",
+      "type" : "student"
+    },
+    "zMufUHtYvncaSP2PtjJ6OOuVcJi1" : {
+      "e_mail" : "dam@gmail.com",
+      "fname" : "damn",
+      "lName" : "damn",
+      "password" : "123456"
+    }
+  },
+  "applicant" : {
+    "-M4M7c-Opcie8jkG3Mpa" : {
+      "applyDate" : "2020-04-08T00:13:24.453Z",
+      "desc" : "111",
+      "e_mail" : "guanzhou.song@gmail.com",
+      "name" : "Guanzhou Song",
+      "phone" : "1111111111",
+      "status" : "2.1",
+      "task_id" : "1"
+    }
+  },
+  "task" : {
+    "-M4LdJhmclRskm2LOfIF" : {
+      "desc" : "222222",
+      "e_mail" : "guanzhou.song2@gmail.com",
+      "phone" : "2222222222",
+      "postDate" : "2020-04-07T21:56:32.349Z",
+      "reward" : "222",
+      "startDate" : "2020-04-14T21:56:32.349Z",
+      "status" : "1",
+      "task_id" : "-M4LdJhmclRskm2LOfIF",
+      "title" : "task2"
+    },
+    "-M4Lmcg_6iacxLqTshhp" : {
+      "desc" : "4321234567",
+      "e_mail" : "guanzhou.song@gmail.com",
+      "phone" : "1111111111",
+      "postDate" : "2020-04-07T22:37:18.073Z",
+      "reward" : "23456",
+      "startDate" : "2020-04-14T22:37:18.073Z",
+      "status" : "1",
+      "task_id" : "-M4Lmcg_6iacxLqTshhp",
+      "title" : "waesfrgty"
+    },
+    "-M4M4MGJ16AFpKOK5jHK" : {
+      "desc" : "33333",
+      "e_mail" : "guanzhou.song@gmail.com",
+      "phone" : "3333333333",
+      "postDate" : "2020-04-07T23:59:07.007Z",
+      "reward" : "3333",
+      "startDate" : "2020-04-14T23:59:07.007Z",
+      "status" : "1.1",
+      "task_id" : "-M4M4MGJ16AFpKOK5jHK",
+      "title" : "tst3"
+    }
+  },
+  "task-applicant" : {
+    "0" : {
+      "-M4Lxw_uTkD9bPYPdTe1" : {
+        "applyDate" : "2020-04-07T23:26:46.425Z",
+        "desc" : "wdefrgthygfds",
+        "e_mail" : "guanzhou.song@gmail.com",
+        "name" : "Guanzhou Song",
+        "phone" : "1234567890",
+        "task_id" : "0"
+      }
+    },
+    "1" : {
+      "-M4M7c-Opcie8jkG3Mpa" : {
+        "applyDate" : "2020-04-08T00:13:24.453Z",
+        "desc" : "111",
+        "e_mail" : "guanzhou.song@gmail.com",
+        "name" : "Guanzhou Song",
+        "phone" : "1111111111",
+        "status" : "2.1",
+        "task_id" : "1"
+      }
+    },
+    "-M4LdJhmclRskm2LOfIF" : {
+      "desc" : "222222",
+      "e_mail" : "guanzhou.song2@gmail.com",
+      "phone" : "2222222222",
+      "postDate" : "2020-04-07T21:56:32.349Z",
+      "reward" : "222",
+      "startDate" : "2020-04-14T21:56:32.349Z",
+      "status" : "1",
+      "task_id" : "-M4LdJhmclRskm2LOfIF",
+      "title" : "task2"
+    },
+    "-M4Lmcg_6iacxLqTshhp" : {
+      "desc" : "4321234567",
+      "e_mail" : "guanzhou.song@gmail.com",
+      "phone" : "1111111111",
+      "postDate" : "2020-04-07T22:37:18.073Z",
+      "reward" : "23456",
+      "startDate" : "2020-04-14T22:37:18.073Z",
+      "status" : "1",
+      "task_id" : "-M4Lmcg_6iacxLqTshhp",
+      "title" : "waesfrgty"
+    },
+    "-M4M4MGJ16AFpKOK5jHK" : {
+      "desc" : "33333",
+      "e_mail" : "guanzhou.song@gmail.com",
+      "phone" : "3333333333",
+      "postDate" : "2020-04-07T23:59:07.007Z",
+      "reward" : "3333",
+      "startDate" : "2020-04-14T23:59:07.007Z",
+      "status" : "1.1",
+      "task_id" : "-M4M4MGJ16AFpKOK5jHK",
+      "title" : "tst3"
+    }
+  },
+  "user-applicant" : {
+    "WBTyv6mWvDVS4Yi8GmIsg6nK3382" : {
+      "-M4Lxw_uTkD9bPYPdTe1" : {
+        "applyDate" : "2020-04-07T23:26:46.425Z",
+        "desc" : "wdefrgthygfds",
+        "e_mail" : "guanzhou.song@gmail.com",
+        "name" : "Guanzhou Song",
+        "phone" : "1234567890",
+        "task_id" : "-M4LdJhmclRskm2LOfIF"
+      },
+      "-M4M7c-Opcie8jkG3Mpa" : {
+        "applyDate" : "2020-04-08T00:13:24.453Z",
+        "desc" : "111",
+        "e_mail" : "guanzhou.song@gmail.com",
+        "name" : "Guanzhou Song",
+        "phone" : "1111111111",
+        "status" : "2.1",
+        "task_id" : "1"
+      }
+    }
+  },
+  "user-task" : {
+    "WBTyv6mWvDVS4Yi8GmIsg6nK3382" : {
+      "-M4LdJhmclRskm2LOfIF" : {
+        "desc" : "222222",
+        "e_mail" : "guanzhou.song2@gmail.com",
+        "phone" : "2222222222",
+        "postDate" : "2020-04-07T21:56:32.349Z",
+        "reward" : "222",
+        "startDate" : "2020-04-14T21:56:32.349Z",
+        "status" : "1",
+        "task_id" : "-M4LdJhmclRskm2LOfIF",
+        "title" : "task2"
+      },
+      "-M4Lmcg_6iacxLqTshhp" : {
+        "desc" : "4321234567",
+        "e_mail" : "guanzhou.song@gmail.com",
+        "phone" : "1111111111",
+        "postDate" : "2020-04-07T22:37:18.073Z",
+        "reward" : "23456",
+        "startDate" : "2020-04-14T22:37:18.073Z",
+        "status" : "1",
+        "task_id" : "-M4Lmcg_6iacxLqTshhp",
+        "title" : "waesfrgty"
+      },
+      "-M4M4MGJ16AFpKOK5jHK" : {
+        "desc" : "33333",
+        "e_mail" : "guanzhou.song@gmail.com",
+        "phone" : "3333333333",
+        "postDate" : "2020-04-07T23:59:07.007Z",
+        "reward" : "3333",
+        "startDate" : "2020-04-14T23:59:07.007Z",
+        "status" : "1.1",
+        "task_id" : "-M4M4MGJ16AFpKOK5jHK",
+        "title" : "tst3"
+      }
+    }
+  },
+  "users" : {
+    "WBTyv6mWvDVS4Yi8GmIsg6nK3382" : {
+      "name" : "Guanzhou Song"
+    },
+    "bq0iWWQHhzXI2LCVR4LnUkQ0thq2" : {
+      "avatar" : "http://gravatar.com/avatar/a058834d9bcba4af1290670376125f16?d=identicon",
+      "name" : "hua"
+    }
+  }
+}

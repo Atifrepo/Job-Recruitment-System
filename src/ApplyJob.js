@@ -34,7 +34,8 @@ class ApplyJob extends Component {
                     name: auth.currentUser.displayName,
                     phone: auth.currentUser.phoneNumber,
                     e_mail: auth.currentUser.email,
-                    desc: null
+                    desc: null,
+                    applyDate: new Date(new Date().getTime())
                 }
             })
         });
@@ -96,7 +97,7 @@ class ApplyJob extends Component {
                         </div>
                     </label>
                     <br/><br/>
-                    <ApplyJobSuccess data={this.props.myInfo} id={this.props.match.params.id} title="Submit" link="/student"/>
+                    <ApplyJobSuccess data={this.state.myInfo} id={this.props.match.params.id} title="Submit" link="/student"/>
                 </form>
             </div>
 
