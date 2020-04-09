@@ -15,7 +15,7 @@ class TaskDetails extends Component {
                 <div className="Task">
                     <h1 className="TaskHeader">Task Details</h1>
                     <Paper elevation={5}>
-                        <TaskDetails_detail id={0}/>
+                        <TaskDetails_detail id={ this.props.match.params.id}/>
                         <Button variant="contained" color="primary" href={'/apply/'+this.props.match.params.id}>Apply</Button>
                         <Button variant="contained" color="red" href={'/market'}>Back</Button>
 
