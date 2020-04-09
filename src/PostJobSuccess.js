@@ -125,8 +125,9 @@ class PostJobSuccess extends React.Component {
             data['task_id'] = newPostKey;
             data['status'] = "1.1";
             let updates = {};
+            data['post_user_id'] = auth.currentUser.uid;
             updates['/task/' + newPostKey] = data;
-            updates['/user-task/' + auth.currentUser.uid + '/' + newPostKey] = data;
+            updates['/user-task/' + auth.currentUser.uid + '/task/' + newPostKey] = data;
             updates['/task-applicant/' + newPostKey] = data;
             database.ref().update(updates, function (error) {
                 if (error) {

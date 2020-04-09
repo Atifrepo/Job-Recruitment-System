@@ -19,12 +19,12 @@ class JobItem extends React.Component {
 
     render() {
         const item = this.props.data;
-        let link = "/jobSummary/" + item.id;
+        let link = "/jobSummary/apply/" + item.task_id;
         return (
             <li className="comment-item" style={{'color': 'white'}}>
                 <h3>
                     <i className="icon-user"></i>
-                    <NavLink href={link}>{item.title} &nbsp;
+                    <NavLink href={link}>{item.task?item.task.title:"Error"} &nbsp;
                         {/*{item.status == '1' ? <FontAwesomeIcon icon={faUserClock}/> : ''} */}
                     </NavLink>
                 </h3>

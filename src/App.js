@@ -6,13 +6,14 @@ import Login2 from './login2';
 import Header from './header'
 import Student from './pages/Student'
 import SignUp from "./signup";
-import JobSummary from "./pages/JobSummary"
+import JobSummaryApply from "./pages/JobSummaryApply"
 import Market from "./Market";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import TaskDetails from "./TaskDetails";
 import PostJob from "./PostJob";
 import Profile from "./MyProfile"
 import PrivateRoute from "./PrivateRoute";
+import JobSummaryPost from "./pages/JobSummaryPost";
 
 class App extends Component {
 
@@ -29,9 +30,10 @@ class App extends Component {
                                 <Route exact path='/' component={Market}/>
                                 <Route path='/login' component={Login2}/>
                                 <Route path='/apply/:id' component={ApplyJob}/>
-                                <PrivateRoute path='/student' component={Student}/>
+                                <PrivateRoute exact path='/student' component={Student}/>
                                 <PrivateRoute path='/SignUp' component={SignUp}/>
-                                <PrivateRoute path='/JobSummary/:id' component={JobSummary}/>
+                                <Route path='/JobSummary/apply/:id' component={JobSummaryApply}/>
+                                <Route path='/JobSummary/post/:id' component={JobSummaryPost}/>
                                 <PrivateRoute path='/market' component={Market}/>
                                 <Route path='/jobdetail/:id' component={TaskDetails}/>
                                 <PrivateRoute path='/postjob' component={PostJob}/>

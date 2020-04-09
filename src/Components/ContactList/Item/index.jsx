@@ -4,10 +4,15 @@ import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import './style.less'
+import SelectApplicantSuccess from "./SelectApplicantSuccess";
 
 class ContactItem extends React.Component {
     constructor(props, context) {
         super(props, context);
+    }
+
+    handleClick() {
+
     }
 
     render() {
@@ -25,9 +30,24 @@ class ContactItem extends React.Component {
                                     className="inline"
                                     color="textPrimary"
                                 >
+                                    Name:
+                                </Typography>
+
+                                {item.name}
+                                <Typography/>
+                                <Typography
+                                    component="span"
+                                    variant="body2"
+                                    className="inline"
+                                    color="textPrimary"
+                                >
                                     Phone:
                                 </Typography>
-                                {item.phone}
+
+                                {this.props.hide ?
+                                    "***-***-" + item.phone.substr(6, 4) :
+                                    item.phone
+                                }
                                 <Typography/>
                                 <Typography
                                     component="span"
@@ -37,10 +57,23 @@ class ContactItem extends React.Component {
                                 >
                                     Email:
                                 </Typography>
-                                <a href={`mailto:${item.email}`} style={{color: '#000000'}}>{item.email}</a>
+                                <a href={`mailto:${item.email}`} style={{color: '#000000'}}>{item.e_mail}</a>
+                                <Typography/>
+                                <Typography
+                                    component="span"
+                                    variant="body2"
+                                    className="inline"
+                                    color="textPrimary"
+                                >
+                                    Description:
+                                </Typography>
+
+                                {item.desc}
+                                <Typography/>
                             </React.Fragment>
                         }
                     />
+                    {this.props.enableChoice ? <SelectApplicantSuccess data={item} title={"Pick this Candidate"}></SelectApplicantSuccess> : <div/>}
                 </ListItem>
                 <Divider/>
             </div>

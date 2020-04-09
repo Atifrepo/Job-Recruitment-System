@@ -4,7 +4,7 @@ import './style.less'
 import {Link} from "react-router-dom";
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
-class JobList extends React.Component {
+class JobListPost extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state={
@@ -29,4 +29,4 @@ class JobList extends React.Component {
     }
 }
 
-export default JobList
+export default JobListPost

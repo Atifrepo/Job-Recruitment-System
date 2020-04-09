@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Item from '../JobList/Item'
+import Item from './Item'
 
 import './style.less'
 

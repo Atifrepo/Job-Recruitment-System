@@ -9,9 +9,8 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import {NavLink} from 'react-router-dom'
-import {auth, database} from "./firebase";
-import {validate} from "validate.js";
-import moment from 'moment';
+import {auth, database} from "../../../firebase";
+
 
 const styles = theme => ({
     root: {
@@ -54,7 +53,7 @@ const DialogActions = withStyles(theme => ({
 }))(MuiDialogActions);
 
 let constraints = {
-    name: {
+    title: {
         presence: true
     },
     phone: {
@@ -68,74 +67,77 @@ let constraints = {
         presence: true,
         email: true
     },
+    reward: {
+        numericality: {
+            onlyInteger: true
+        },
+        presence: true
+    },
+    startDate: {
+        datetime: {
+            dateOnly: false,
+            earliest: new Date(),
+            message: " is Invalid."
+        }
+    },
     desc: {
         presence: true
     }
 }
 
-
-class ApplyJobSuccess extends React.Component {
+class SelectApplicantSuccess extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: false
+            open: false,
+            taskId: null
         }
     }
-
-    componentDidMount() {
-        let task_ref = database.ref("task/" + this.props.id);
-        task_ref.on("value", (snapshot) => {
-            if(snapshot.val()){
-                this.setState({
-                    title: snapshot.val().title
-                });
-            }
-        });
-        console.log(this.state.title)
-    }
-
 
     handleClickOpen = () => {
-        let currentComponent = this;
-        console.log(this.props.data)
-        let alertMsg = validate(this.props.data, constraints);
-        console.log(alertMsg);
-        if (alertMsg) {
-            let res = "";
-            for (let key of Object.keys(alertMsg)) {
-                res += (alertMsg[key][0] + '\n');
-            }
-            res += "Please verify your input.";
-            alert(res);
-        } else {
-            let taskId = this.props.id;
-            let data = this.props.data;
-            data['task_id'] = taskId;
-            data['status'] = "2.1";
-            data['title'] = this.state.title;
-            let newAppKey = database.ref().child('applicant').push().key;
-            let updates = {};
-
-            data['applicant_user_id'] = auth.currentUser.uid;
-            data['applicant_id'] = newAppKey;
-            updates['/applicant/' + newAppKey] = data;
-            updates['/task-applicant/' + taskId + '/applicant/' + newAppKey] = data;
-            updates['/user-applicant/' + auth.currentUser.uid + '/applicant/' + newAppKey] = data;
-            database.ref().update(updates, function (error) {
-                if (error) {
-                    alert("Something went wrong, please try again");
-                } else {
-                    // Data saved successfully!
-                    currentComponent.setState({
-                        applicantId: newAppKey,
-                        taskId: taskId,
-                        open: true
-                    })
-                }
-            });
-        }
-
+        this.setState({open: true});
     };
+
+    handleConfirm = () => {
+        let currentComponent = this;
+        let data = currentComponent.props.data;
+        let updates = {};
+        updates['/task/' + data.task_id + '/status'] = "1.2";
+        updates['/user-task/' + auth.currentUser.uid + '/task/' + data.task_id + '/status'] = "1.2";
+        updates['/task-applicant/' + data.task_id + '/status'] = "1.2";
+        let a_data = {};
+        a_data[data.applicant_id] = data;
+        updates['/task-applicant/' + data.task_id + '/applicant'] = a_data;
+        database.ref().update(updates, function (error) {
+            if (error) {
+                alert("Something went wrong, please try again");
+            }
+        });
+
+    }
+
+    //     let currentComponent = this;
+    //     let newPostKey = database.ref().child('task').push().key;
+    //     let data = this.props.data;
+    //     data['task_id'] = newPostKey;
+    //     data['status'] = "1.1";
+    //     let updates = {};
+    //     data['post_user_id'] = auth.currentUser.uid;
+    //     updates['/task/' + newPostKey] = data;
+    //     updates['/user-task/' + auth.currentUser.uid + '/task/' + newPostKey] = data;
+    //     updates['/task-applicant/' + newPostKey] = data;
+    //     database.ref().update(updates, function (error) {
+    //         if (error) {
+    //             alert("Something went wrong, please try again");
+    //         } else {
+    //             // Data saved successfully!
+    //             currentComponent.setState({
+    //                 taskId: newPostKey,
+    //                 open: true
+    //             })
+    //         }
+    //     });
+
 
     handleClose = () => {
         this.setState({
@@ -143,6 +145,7 @@ class ApplyJobSuccess extends React.Component {
         });
 
     };
+
 
     render() {
         return (
@@ -152,18 +155,16 @@ class ApplyJobSuccess extends React.Component {
                 </Button>
                 <Dialog onClose={this.handleClose} aria-labelledby="customized-dialog-title" open={this.state.open}>
                     <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
-                        Application Submitted
+                        Confirm Applicant
                     </DialogTitle>
                     <DialogContent dividers>
                         <Typography gutterBottom>
-                            Your application has been submitted.
-                        </Typography>
-                        <Typography gutterBottom>
-                            The Job Poster will contact you any minute!
+                            Are you sure to select {this.props.data.name} as your Helper?
                         </Typography>
                     </DialogContent>
                     <DialogActions>
-                        <NavLink className="btn btn-primary" to={this.props.link}>OK</NavLink>
+                        <button className="btn btn-primary" onClick={this.handleClose}>Go Back</button>
+                        <button className="btn btn-primary" onClick={this.handleConfirm}>Confirm</button>
                     </DialogActions>
                 </Dialog>
             </div>
@@ -172,4 +173,4 @@ class ApplyJobSuccess extends React.Component {
 
 }
 
-export default ApplyJobSuccess
+export default SelectApplicantSuccess
