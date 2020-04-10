@@ -8,12 +8,10 @@ export function parseCode(statusCode) {
     }else if(statusCode === '2.1'){
         return "Applied";
     }else if(statusCode === '2.2'){
-        return "Accepted";
+        return "In Progress";
     }else if(statusCode === '2.3'){
         return "Denied";
     }else if(statusCode === '2.4'){
-        return "In Progress";
-    }else if(statusCode === '2.5'){
         return "Complete";
     }
 

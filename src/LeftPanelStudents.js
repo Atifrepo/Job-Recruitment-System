@@ -24,7 +24,7 @@ class LeftPanelStudents extends React.Component {
     }
 
     componentDidMount() {
-        let ref = database.ref("user-task/" + auth.currentUser.uid +'/task');
+        let ref = database.ref("user-task/" + auth.currentUser.uid + '/task');
         this.data = ref.on("value", (snapshot) => {
             const datalist = [];
             snapshot.forEach(data => {
@@ -35,20 +35,14 @@ class LeftPanelStudents extends React.Component {
             });
         });
 
-        ref = database.ref("user-applicant/" + auth.currentUser.uid);
-        let task_ref = database.ref("task");
+        ref = database.ref("user-applicant/" + auth.currentUser.uid + "/applicant");
         this.data = ref.on("value", (snapshot) => {
             const datalist = [];
             snapshot.forEach(data => {
                 let item = data.val();
-                task_ref = database.ref("task/" + item.task_id);
-                task_ref.on("value", (snapshot) => {
-                    item['task'] = snapshot.val();
-                })
                 datalist.push(item);
             });
             console.log(datalist);
-
             this.setState({
                 loading: false,
                 applydata: datalist
@@ -86,9 +80,11 @@ class LeftPanelStudents extends React.Component {
                                     <Divider/>
                                     {this.state.postdata.length ?
                                         <JobListPost data={this.state.postdata}/> :
-                                        <Link style={{'color': '#fb601d'}} to="/postjob">
-                                            Post First Task!
-                                        </Link>
+                                        <div style={{'paddingTop': '20px', 'paddingLeft': '30px','paddingBottom': '20px'}}>
+                                            <Link style={{'color': '#fb601d'}} to="/postjob">
+                                                <h5>Post a Task Now!</h5>
+                                            </Link>
+                                        </div>
 
                                     }
 
@@ -103,9 +99,11 @@ class LeftPanelStudents extends React.Component {
                                     <Divider/>
                                     {this.state.applydata.length ?
                                         <JobListApply data={this.state.applydata}/> :
-                                        <Link style={{'color': '#fb601d'}} to="/">
-                                            Apply Now!
-                                        </Link>
+                                        <div style={{'paddingTop': '20px', 'paddingLeft': '30px','paddingBottom': '20px'}}>
+                                            <Link style={{'color': '#fb601d'}} to="/">
+                                                <h5>Apply Now!</h5>
+                                            </Link>
+                                        </div>
 
                                     }
                                 </div>

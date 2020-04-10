@@ -5,6 +5,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import './style.less'
 import SelectApplicantSuccess from "./SelectApplicantSuccess";
+import JobDoneSuccess from "./JobDoneSuccess";
 
 class ContactItem extends React.Component {
     constructor(props, context) {
@@ -73,7 +74,8 @@ class ContactItem extends React.Component {
                             </React.Fragment>
                         }
                     />
-                    {this.props.enableChoice ? <SelectApplicantSuccess data={item} title={"Pick this Candidate"}></SelectApplicantSuccess> : <div/>}
+                    {this.props.status==="1.1" ? <SelectApplicantSuccess data={item} title={"Pick this Candidate"}/> : <div/>}
+                    {this.props.status==="1.2"?<JobDoneSuccess data={item} title={"Job Completed"}/> :<div/>}
                 </ListItem>
                 <Divider/>
             </div>

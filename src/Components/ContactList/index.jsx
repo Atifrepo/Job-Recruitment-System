@@ -13,14 +13,14 @@ class ContactList extends React.Component {
         return (
             <div style={{'paddingLeft':'20px'}}>
                 <h3 align={'left'} >Applied Candidate</h3>
-                {(data===null || data.length===0)?
+                {(!data || data.length===0)?
                     <div>
                         <h5>Looking for Candidate, please check back later!</h5>
                     </div>
                     :
                     <List className="root">
                     {data.map((item) => {
-                        return <Item data={item} hide={false} enableChoice={true} />
+                        return <Item data={item} status={this.props.status} enableChoice={true} />
                     })}
 
                 </List>}

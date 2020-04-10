@@ -32,7 +32,7 @@ class App extends Component {
                                 <Route path='/apply/:id' component={ApplyJob}/>
                                 <PrivateRoute exact path='/student' component={Student}/>
                                 <PrivateRoute path='/SignUp' component={SignUp}/>
-                                <Route path='/JobSummary/apply/:id' component={JobSummaryApply}/>
+                                <Route path='/JobSummary/apply/:id/:pid' component={JobSummaryApply}/>
                                 <Route path='/JobSummary/post/:id' component={JobSummaryPost}/>
                                 <PrivateRoute path='/market' component={Market}/>
                                 <Route path='/jobdetail/:id' component={TaskDetails}/>

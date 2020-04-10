@@ -3,6 +3,12 @@ import ContactList from "../Components/ContactList";
 import Divider from "@material-ui/core/Divider";
 import TaskDetails_detail from "../TaskDetails_detail";
 import {auth, database} from "../firebase";
+import JobSummaryPost from "./JobSummaryPost";
+import JobSummaryPostDelete from "./JobSummaryPostDelete";
+import Item from "../Components/ContactList/Item";
+import {parseCode} from "../status";
+import JobSummaryApplyDelete from "./JobSummaryApplyDelete";
+import {convertTime} from "../timeFormat";
 
 class JobSummaryApply extends Component {
     constructor() {
@@ -17,43 +23,62 @@ class JobSummaryApply extends Component {
     }
 
     componentDidMount() {
-        let task_ref = database.ref("task/" + this.props.match.params.id);
-        let app_ref = database.ref("task");
-        task_ref.on("value", (snapshot) => {
+        let app_id = this.props.match.params.id
+        let ref = database.ref("applicant/" + app_id);
+
+        ref.on("value", (snapshot) => {
             let item = snapshot.val();
-            if(item){
-                this.setState({task_data: item, loading: false});
-            }
-            console.log(item);
+            this.setState({
+                applicant_data: item
+            });
         });
+
+
+        let task_ref = database.ref("task/" + this.props.match.params.pid);
+        let task_data = null;
+        task_ref.on("value", (snapshot) => {
+            task_data = snapshot.val();
+            this.setState({
+                task_data: task_data,
+                loading: false
+            });
+        });
+
+
+
     }
 
     render() {
-        const data = this.state.task_data;
-        console.log(data);
-        return this.state.loading || data===null? (<div>Loading</div>) : (
+        const applicant_data = this.state.applicant_data;
+        const task_data = this.state.task_data;
+        console.log(applicant_data);
+        console.log(task_data);
+        return (!applicant_data || !task_data) ? (<div>Loading</div>) : (
             //import jon detail
             <div>
                 <div align={'left'}>
                     <h3>&nbsp;&nbsp;My Application Summary</h3>
                     <ul>
-                        <li>Job Name: {data.title}</li>
-                        <li>Status: {data.status}</li>
-                        <li>Applied On: {data.apply_date}</li>
-                        <li>Expire Date: {data.expire_date}</li>
+                        <li>Job Name: {applicant_data.title}</li>
+                        <li>Status: {parseCode(applicant_data.status)}</li>
+                        <li>Applied On: {convertTime(applicant_data.applyDate)}</li>
+                        <li>Expire Date: {convertTime(task_data.startDate)}</li>
                     </ul>
                 </div>
                 <Divider/>
-                {this.props.match.params.id == 1 ?
-                    <div>
-                        <ContactList/>
-                        <Divider/>
-                    </div>
-                    : <div/>
+                {(applicant_data.status === "2.2" || applicant_data.status === "2.4") ?
+                    <Item data={task_data} status={applicant_data.status}/> :
+                    <div/>
                 }
+
                 <Divider/>
-                <TaskDetails_detail id={this.props.match.params.id}/>
-                <Divider/>
+                <TaskDetails_detail id={applicant_data.task_id}/>
+
+                {applicant_data.status==="2.1"?<div style={{'paddingLeft':'20px','text-align':'center'}}>
+                        <JobSummaryApplyDelete applicant_data={applicant_data} task_data={task_data} title={"WithDraw"}/>
+                    </div>
+                    :
+                    <div/>}
             </div>
 
         );

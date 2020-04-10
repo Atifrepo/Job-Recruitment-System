@@ -35,7 +35,7 @@ class TaskDetails_detail extends Component {
         const data  = this.state.task_details;
         return (
 
-            <div className="TaskInfo">
+            <div className="TaskInfo" style={{'paddingLeft':'20px'}}>
                 <Typography variant="h6" align="left" component="h2" gutterBottom>
                     Task:
                     <h6>
@@ -46,21 +46,21 @@ class TaskDetails_detail extends Component {
                 <Typography variant="h6" align="left" component="h2" gutterBottom>
                     Poster:
                     <h6>
-                        {data.displayName}
+                        {data.name}
                     </h6>
                 </Typography>
                 <hr/>
                 <Typography variant="h6" align="left" component="h2" gutterBottom>
                     Task Description:
                     <h6>
-                        {fakeData.details}
+                        {data.desc}
                     </h6>
                 </Typography>
                 <hr/>
                 <Typography variant="h6" align="left" component="h2" gutterBottom>
                     Rewards:
                     <h6>
-                        {fakeData.salary}
+                        ${data.reward}
                     </h6>
                 </Typography>
                 <hr/>

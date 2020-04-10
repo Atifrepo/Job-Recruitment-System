@@ -126,7 +126,7 @@ class PostJobSuccess extends React.Component {
             data['status'] = "1.1";
             let updates = {};
             data['post_user_id'] = auth.currentUser.uid;
-            data['displayName'] = auth.currentUser.displayName;
+            data['name'] = auth.currentUser.displayName;
             updates['/task/' + newPostKey] = data;
             updates['/user-task/' + auth.currentUser.uid + '/task/' + newPostKey] = data;
             updates['/task-applicant/' + newPostKey] = data;
@@ -174,7 +174,7 @@ class PostJobSuccess extends React.Component {
                         </Typography>
                     </DialogContent>
                     <DialogActions>
-                        <NavLink className="btn btn-primary" to={"/jobSummary/" + this.state.taskId}>OK</NavLink>
+                        <NavLink className="btn btn-primary" to={"/jobdetail/" + this.state.taskId}>OK</NavLink>
                     </DialogActions>
                 </Dialog>
             </div>

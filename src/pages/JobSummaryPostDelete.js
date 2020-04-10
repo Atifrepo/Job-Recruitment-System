@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import {NavLink} from 'react-router-dom'
-import {auth, database} from "../../../firebase";
+import {auth, database} from "../firebase";
 
 
 const styles = theme => ({
@@ -52,38 +52,6 @@ const DialogActions = withStyles(theme => ({
     },
 }))(MuiDialogActions);
 
-let constraints = {
-    title: {
-        presence: true
-    },
-    phone: {
-        length: {is: 10},
-        numericality: {
-            onlyInteger: true
-        },
-        presence: true
-    },
-    e_mail: {
-        presence: true,
-        email: true
-    },
-    reward: {
-        numericality: {
-            onlyInteger: true
-        },
-        presence: true
-    },
-    startDate: {
-        datetime: {
-            dateOnly: false,
-            earliest: new Date(),
-            message: " is Invalid."
-        }
-    },
-    desc: {
-        presence: true
-    }
-}
 
 class SelectApplicantSuccess extends React.Component {
     constructor(props) {
@@ -103,28 +71,21 @@ class SelectApplicantSuccess extends React.Component {
         let data = currentComponent.props.data;
         let updates = {};
 
+        updates['/task/' + data.task_id] = null;
+        updates['/task-applicant/' + data.task_id] = null;
+        updates['/user-task/' + auth.currentUser.uid+ "/task/" + data.task_id] = null;
+
         let ref = database.ref('/task-applicant/' + data.task_id + '/applicant');
         this.data = ref.on("value", (snapshot) => {
             snapshot.forEach(data_app => {
 
                 let app_id = data_app.val()['applicant_id'];
-                let status = "0"
-                if(app_id === data.applicant_id){
-                    status = "2.2"
-                }else{
-                    status = "2.3"
-                }
-                updates['/applicant/' + app_id + '/status'] = status;
-                updates['/user-applicant/' + auth.currentUser.uid + '/applicant/' + app_id + '/status'] = status;
+                let app_user_id = data_app.val()['applicant_user_id'];
+                updates['/applicant/' + app_id ] = null;
+                updates['/user-applicant/' + app_user_id + '/applicant/' + app_id ] = null;
             });
         });
 
-        updates['/task/' + data.task_id + '/status'] = "1.2";
-        updates['/user-task/' + auth.currentUser.uid + '/task/' + data.task_id + '/status'] = "1.2";
-        updates['/task-applicant/' + data.task_id + '/status'] = "1.2";
-        let a_data = {};
-        a_data[data.applicant_id] = data;
-        updates['/task-applicant/' + data.task_id + '/applicant'] = a_data;
         database.ref().update(updates, function (error) {
             if (error) {
                 alert("Something went wrong, please try again");
@@ -132,29 +93,6 @@ class SelectApplicantSuccess extends React.Component {
         });
 
     }
-
-    //     let currentComponent = this;
-    //     let newPostKey = database.ref().child('task').push().key;
-    //     let data = this.props.data;
-    //     data['task_id'] = newPostKey;
-    //     data['status'] = "1.1";
-    //     let updates = {};
-    //     data['post_user_id'] = auth.currentUser.uid;
-    //     updates['/task/' + newPostKey] = data;
-    //     updates['/user-task/' + auth.currentUser.uid + '/task/' + newPostKey] = data;
-    //     updates['/task-applicant/' + newPostKey] = data;
-    //     database.ref().update(updates, function (error) {
-    //         if (error) {
-    //             alert("Something went wrong, please try again");
-    //         } else {
-    //             // Data saved successfully!
-    //             currentComponent.setState({
-    //                 taskId: newPostKey,
-    //                 open: true
-    //             })
-    //         }
-    //     });
-
 
     handleClose = () => {
         this.setState({
@@ -167,21 +105,19 @@ class SelectApplicantSuccess extends React.Component {
     render() {
         return (
             <div>
-                <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+                <Button variant="outlined" color="secondary" onClick={this.handleClickOpen}>
                     {this.props.title}
                 </Button>
                 <Dialog onClose={this.handleClose} aria-labelledby="customized-dialog-title" open={this.state.open}>
-                    <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
-                        Confirm Applicant
-                    </DialogTitle>
+
                     <DialogContent dividers>
                         <Typography gutterBottom>
-                            Are you sure to select {this.props.data.name} as your Helper?
+                            Are you sure to DELETE the post?
                         </Typography>
                     </DialogContent>
                     <DialogActions>
                         <button className="btn btn-primary" onClick={this.handleClose}>Go Back</button>
-                        <button className="btn btn-primary" onClick={this.handleConfirm}>Confirm</button>
+                        <NavLink className="btn btn-primary" onClick={this.handleConfirm} to={"/student"}>Delete</NavLink>
                     </DialogActions>
                 </Dialog>
             </div>

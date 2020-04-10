@@ -102,29 +102,12 @@ class SelectApplicantSuccess extends React.Component {
         let currentComponent = this;
         let data = currentComponent.props.data;
         let updates = {};
-
-        let ref = database.ref('/task-applicant/' + data.task_id + '/applicant');
-        this.data = ref.on("value", (snapshot) => {
-            snapshot.forEach(data_app => {
-
-                let app_id = data_app.val()['applicant_id'];
-                let status = "0"
-                if(app_id === data.applicant_id){
-                    status = "2.2"
-                }else{
-                    status = "2.3"
-                }
-                updates['/applicant/' + app_id + '/status'] = status;
-                updates['/user-applicant/' + auth.currentUser.uid + '/applicant/' + app_id + '/status'] = status;
-            });
-        });
-
-        updates['/task/' + data.task_id + '/status'] = "1.2";
-        updates['/user-task/' + auth.currentUser.uid + '/task/' + data.task_id + '/status'] = "1.2";
-        updates['/task-applicant/' + data.task_id + '/status'] = "1.2";
-        let a_data = {};
-        a_data[data.applicant_id] = data;
-        updates['/task-applicant/' + data.task_id + '/applicant'] = a_data;
+        updates['/task/' + data.task_id + '/status'] = "1.3";
+        updates['/user-task/' + auth.currentUser.uid + '/task/' + data.task_id + '/status'] = "1.3";
+        updates['/task-applicant/' + data.task_id + '/status'] = "1.3";
+        updates['/task-applicant/' + data.task_id + '/applicant/'+data.applicant_id+"/status"] = "2.4";
+        updates['/applicant/' + data.applicant_data + '/status'] = "2.4";
+        updates['/user-applicant/' + data.applicant_user_id + '/applicant/' + data.applicant_id + '/status'] = "2.4";
         database.ref().update(updates, function (error) {
             if (error) {
                 alert("Something went wrong, please try again");
@@ -172,11 +155,11 @@ class SelectApplicantSuccess extends React.Component {
                 </Button>
                 <Dialog onClose={this.handleClose} aria-labelledby="customized-dialog-title" open={this.state.open}>
                     <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
-                        Confirm Applicant
+                        Confirm Job-Well-Done?
                     </DialogTitle>
                     <DialogContent dividers>
                         <Typography gutterBottom>
-                            Are you sure to select {this.props.data.name} as your Helper?
+                            Are you sure the task has been completed?
                         </Typography>
                     </DialogContent>
                     <DialogActions>
