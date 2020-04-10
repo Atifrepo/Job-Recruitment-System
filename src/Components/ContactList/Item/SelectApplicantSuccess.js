@@ -115,7 +115,7 @@ class SelectApplicantSuccess extends React.Component {
                     status = "2.3"
                 }
                 updates['/applicant/' + app_id + '/status'] = status;
-                updates['/user-applicant/' + auth.currentUser.uid + '/applicant/' + app_id + '/status'] = status;
+                updates['/user-applicant/' + data.applicant_user_id + '/applicant/' + app_id + '/status'] = status;
             });
         });
 

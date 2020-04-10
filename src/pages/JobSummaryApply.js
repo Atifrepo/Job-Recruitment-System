@@ -66,8 +66,13 @@ class JobSummaryApply extends Component {
                     </ul>
                 </div>
                 <Divider/>
+
                 {(applicant_data.status === "2.2" || applicant_data.status === "2.4") ?
                     <Item data={task_data} status={applicant_data.status}/> :
+                    <div/>
+                }
+                {(applicant_data.status === "2.2" ) ?
+                    <h5>Please contact the poster to confirm the completeness and get your reward!</h5> :
                     <div/>
                 }
 
