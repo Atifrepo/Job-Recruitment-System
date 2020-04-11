@@ -5,56 +5,76 @@ import './TaskDetails.css'
 import {Container} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import TaskDetails_detail from "./TaskDetails_detail";
-import {auth} from "./firebase"
+import {auth, database} from "./firebase";
 import withAuthorization from "./withAuthorization";
 
-class TaskDetails extends Component {
 
-    constructor(props) {
-        super(props);
+class TaskDetails extends Component {
+    constructor() {
+        super();
         this.state = {
-            user: null,
-            loading: true,
+            isPoster: false,
             uid: null
         }
-
     }
+
     componentDidMount() {
-        auth.onAuthStateChanged((user)=> {
-            if (user) {
+        console.log(this.props.match.params.id);
+        if(auth.currentUser != null) {
+            console.log(auth.currentUser.uid);
+        }
+        auth.onAuthStateChanged(user =>{
+            if(user){
+                let ref = database.ref("user-task/" + user.uid +"/task");
+                console.log(this.state.uid);
+                this.data = ref.on("value", (snapshot) => {
+                    snapshot.forEach(data => {
+                        console.log(data.val()["task_id"])
+                        if(data.val()["task_id"] === this.props.match.params.id)  {
+                            console.log("is poster")
+                            this.setState({
+                                isPoster: true
+                            })
+                        }
+                    });
+                });
                 this.setState({
-                    uid:user.uid
+                    uid : user.uid
                 })
-                console.log(user.uid);
-            } else {
-                // No user is signed in.
-                console.log('There is no logged in user');
+                console.log(this.state.uid)
             }
-        });
-        console.log(this.state)
-    }
+            else {
+                console.log("user not logged in")
+            }
+        })
 
+
+
+
+
+
+    }
 
     render() {
-console.log(this.state.uid);
-        return this.state.uid ? (<Container fixed>
+
+        return (
+            <Container fixed>
                 <hr/>
                 <div className="Task">
-                    {this.state.uid}
                     <h1 className="TaskHeader">Task Details</h1>
                     <Paper elevation={5}>
-                        {this.state.uid}
-                        {auth.currentUser.uid}
                         <TaskDetails_detail id={this.props.match.params.id}/>
-                        <Button variant="contained" color="primary"
-                                href={'/apply/' + this.props.match.params.id}>Apply</Button>
+
+                        <Button disabled = {this.state.isPoster} variant="contained" color="primary" href={'/apply/'+this.props.match.params.id}>Apply</Button>
+
+
                         <Button variant="contained" color="red" href={'/market'}>Back</Button>
 
                     </Paper>
                 </div>
             </Container>
 
-        ) : (<div>Loading</div>);
+        )
     }
 
 }

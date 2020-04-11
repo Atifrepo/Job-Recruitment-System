@@ -13,37 +13,7 @@ import TextField from "@material-ui/core/TextField";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableBody from "@material-ui/core/TableBody";
 import {auth, database} from "./firebase";
-
-//var ref = database().ref("task");
-
-const tasksData = [
-    {
-        id: 0,
-        taskTitle: "Feed my cat",
-        userName: "Van",
-        salary: "20",
-        details: "I am going to leave school next week and I need some one who loves cat to" +
-            "take care of my cat"
-    },
-
-    {
-        id: 1,
-        taskTitle: "Help with the sociological research",
-        userName: "Pro.Big",
-        salary: "30",
-        details: "need a grad student to participate every friday, up to 50 dollars"
-    },
-
-    {
-        id: 2,
-        taskTitle: "Chat with my grandma",
-        userName: "Grandson",
-        salary: "10",
-        details: "Help me chat with my grandma on We-chat every weekend, easy money!"
-
-    }
-
-];
+import {convertTime} from "./timeFormat";
 
 class Market extends Component {
 
@@ -68,11 +38,10 @@ class Market extends Component {
                 loading: false
             });
         });
-
-
     }
 
 
+    //TODO: Search
     handleSearchClick() {
         // console.log("clicked!");
         // database.ref.on("value", function(snapshot) {
@@ -107,7 +76,7 @@ class Market extends Component {
                                 <TableRow>
                                     <TableCell align="left">Task Title</TableCell>
                                     <TableCell align="left">Desc</TableCell>
-                                    <TableCell align="left">Salary</TableCell>
+                                    <TableCell align="left">Reward</TableCell>
                                     <TableCell align="left">Post Date</TableCell>
                                 </TableRow>
                             </TableHead>
@@ -118,9 +87,10 @@ class Market extends Component {
                                             <TableCell align="left" component="th" scope="row">
                                                 <Link href={`/jobdetail/${row.task_id}`}>{row.title}</Link>
                                             </TableCell>
-                                            <TableCell align="left">{row.desc.length > 20 ? row.desc.substring(0,20) + "..." : row.desc}</TableCell>
+                                            <TableCell
+                                                align="left">{row.desc.length > 20 ? row.desc.substring(0, 20) + "..." : row.desc}</TableCell>
                                             <TableCell align="left">{row.reward}</TableCell>
-                                            <TableCell align="left">{row.postDate}</TableCell>
+                                            <TableCell align="left">{convertTime(row.postDate)}</TableCell>
                                         </TableRow>
                                     ))
                                 }
