@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import './TaskDetails.css'
 import Typography from "@material-ui/core/Typography";
-import {auth, database} from "./firebase";
+import {database} from "./firebase";
 
 const fakeData = {
     id: 0,

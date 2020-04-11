@@ -81,8 +81,8 @@ class JobSummaryPost extends Component {
         return (data==null || this.state.loading) ?
             (<div>Loading</div>) :
             (<div>
-                <div align={'left'}>
-                    <h3 style={{'paddingLeft':'20px'}}>My Post Summary</h3>
+                <div align={'left'} style={{'paddingLeft':'20px'}}>
+                    <h3 >My Post Summary</h3>
                     <ul>
                         <li>Job Name: {data.title}</li>
                         <li>Status: {parseCode(data.status)}</li>

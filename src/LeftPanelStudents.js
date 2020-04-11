@@ -66,8 +66,8 @@ class LeftPanelStudents extends React.Component {
                         {this.state.user ?
                             <div>
 
-                                <div style={{backgroundColor: '#152938', height: 50}}>
-                                    <h2 style={{color: '#FFFFFF', paddingLeft: '10px'}}>My Task</h2>
+                                <div id="mytask_background" >
+                                    <h2 id="mytask">My Task</h2>
 
                                 </div>
                                 <div style={{
@@ -76,11 +76,11 @@ class LeftPanelStudents extends React.Component {
                                     overflow: 'auto',
                                     backgroundColor: '#1f3b51'
                                 }}>
-                                    <h3 style={{color: '#FFFFFF', paddingLeft: '30px'}}>My Post</h3>
+                                    <h3 id="mypost">My Post</h3>
                                     <Divider/>
                                     {this.state.postdata.length ?
-                                        <JobListPost data={this.state.postdata}/> :
-                                        <div style={{'paddingTop': '20px', 'paddingLeft': '30px','paddingBottom': '20px'}}>
+                                        <JobListPost id='joblist' data={this.state.postdata}/> :
+                                        <div style={{'padding-top': '20px', 'padding-left': '30px','padding-bottom': '20px'}}>
                                             <Link style={{'color': '#fb601d'}} to="/postjob">
                                                 <h5>Post a Task Now!</h5>
                                             </Link>
@@ -95,7 +95,7 @@ class LeftPanelStudents extends React.Component {
                                     overflow: 'auto',
                                     backgroundColor: '#4b6273'
                                 }}>
-                                    <h3 style={{color: '#FFFFFF', paddingLeft: '30px'}}>My Application</h3>
+                                    <h3 id="mypost">My Application</h3>
                                     <Divider/>
                                     {this.state.applydata.length ?
                                         <JobListApply data={this.state.applydata}/> :

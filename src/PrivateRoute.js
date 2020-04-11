@@ -3,7 +3,7 @@ import {auth} from './firebase';
 import React from "react";
 import Redirect from "react-router-dom/es/Redirect";
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({component: Component, ...rest}) => (
 
         <Route  {...rest} render={(props) => (
             auth.currentUser
