@@ -9,26 +9,22 @@ class ContactList extends React.Component {
     }
 
     render() {
-        let data = [
-            {
-                userName: "Derek Apple",
-                phone: "854-211-2345",
-                email: "dereka@gamil.com"
-            },
-            {
-                userName: "Jessica Banana",
-                phone: "857-084-9842",
-                email: "jessicab@gamil.com"
-            }];
+        const data = this.props.data;
         return (
-            <div>
-                <h3 align={'left'}>&nbsp;&nbsp;Applied Candidate</h3>
-                <List className="root">
-                    {data.map((item, index) => {
-                        return <Item key={index} data={item}/>
+            <div style={{'paddingLeft':'20px'}}>
+                <h3 align={'left'} >Applied Candidate</h3>
+                {(!data || data.length===0)?
+                    <div>
+                        <h5>Looking for Candidate, please check back later!</h5>
+                    </div>
+                    :
+                    <List className="root">
+                    {data.map((item) => {
+                        return <Item data={item} status={this.props.status} enableChoice={true} />
                     })}
 
-                </List>
+                </List>}
+
             </div>
         )
     }

@@ -9,6 +9,9 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import {NavLink} from 'react-router-dom'
+import {auth, database} from "./firebase";
+import {validate} from "validate.js";
+import moment from 'moment';
 
 const styles = theme => ({
     root: {
@@ -50,27 +53,104 @@ const DialogActions = withStyles(theme => ({
     },
 }))(MuiDialogActions);
 
+let  constraints = {
+    title: {
+        presence: true
+    },
+    phone: {
+        length: {is: 10},
+        numericality: {
+            onlyInteger: true
+        },
+        presence: true
+    },
+    e_mail: {
+        presence: true,
+        email:true
+    },
+    reward:{
+        numericality: {
+            onlyInteger: true
+        },
+        presence: true
+    },
+    startDate: {
+        datetime: {
+            dateOnly: false,
+            earliest: new Date(),
+            message: " is Invalid."
+        }
+    },
+    desc: {
+        presence: true
+    }
+}
 
 class PostJobSuccess extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: false
+            open: false,
+            taskId: null
         }
     }
 
-
     handleClickOpen = () => {
-        this.setState({
-            open: true
-        })
+        let currentComponent = this;
+        validate.extend(validate.validators.datetime, {
+            // The value is guaranteed not to be null or undefined but otherwise it
+            // could be anything.
+            parse: function(value, options) {
+                return +moment.utc(value);
+            },
+            // Input is a unix timestamp
+            format: function(value, options) {
+                var format = options.dateOnly ? "YYYY-MM-DD" : "YYYY-MM-DD hh:mm:ss";
+                return moment.utc(value).format(format);
+            }
+        });
+        console.log(this.props.data);
+        let alertMsg = validate(this.props.data, constraints);
+        console.log(alertMsg);
+        if(alertMsg){
+            let res = "";
+            for(let key of Object.keys(alertMsg)){
+                res += (alertMsg[key][0] + '\n');
+            }
+            res += "Please verify your input.";
+            alert(res);
+        }else {
+            let newPostKey = database.ref().child('task').push().key;
+            let data = this.props.data;
+            data['task_id'] = newPostKey;
+            data['status'] = "1.1";
+            let updates = {};
+            data['post_user_id'] = auth.currentUser.uid;
+            data['name'] = auth.currentUser.displayName;
+            updates['/task/' + newPostKey] = data;
+            updates['/user-task/' + auth.currentUser.uid + '/task/' + newPostKey] = data;
+            updates['/task-applicant/' + newPostKey] = data;
+            database.ref().update(updates, function (error) {
+                if (error) {
+                    alert("Something went wrong, please try again");
+                } else {
+                    // Data saved successfully!
+                    currentComponent.setState({
+                        taskId: newPostKey,
+                        open: true
+                    })
+                }
+            });
+        }
     };
+
     handleClose = () => {
         this.setState({
             open: false
         });
 
     };
+
 
     render() {
         return (
@@ -94,7 +174,7 @@ class PostJobSuccess extends React.Component {
                         </Typography>
                     </DialogContent>
                     <DialogActions>
-                        <NavLink className="btn btn-primary" to={this.props.link}>OK</NavLink>
+                        <NavLink className="btn btn-primary" to={"/jobdetail/" + this.state.taskId}>OK</NavLink>
                     </DialogActions>
                 </Dialog>
             </div>

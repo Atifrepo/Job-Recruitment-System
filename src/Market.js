@@ -12,35 +12,8 @@ import {Container} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableBody from "@material-ui/core/TableBody";
-
-const tasksData = [
-    {
-        id: 0,
-        taskTitle: "Feed my cat",
-        userName: "Van",
-        salary: "20",
-        details: "I am going to leave school next week and I need some one who loves cat to" +
-            "take care of my cat"
-    },
-
-    {
-        id: 1,
-        taskTitle: "Help with the sociological research",
-        userName: "Pro.Big",
-        salary: "30",
-        details: "need a grad student to participate every friday, up to 50 dollars"
-    },
-
-    {
-        id: 2,
-        taskTitle: "Chat with my grandma",
-        userName: "Grandson",
-        salary: "10",
-        details: "Help me chat with my grandma on We-chat every weekend, easy money!"
-
-    }
-
-];
+import {auth, database} from "./firebase";
+import {convertTime} from "./timeFormat";
 
 class Market extends Component {
 
@@ -48,20 +21,44 @@ class Market extends Component {
         super(props);
 
         this.state = {
-            taskInfo: [{
-                id: '', taskTitle: '', userName: '', salary: '', details: ''
-            }]
+            tasks: [],
+            loading: true
         }
     }
 
+    componentDidMount() {
+        let ref = database.ref("task");
+        this.data = ref.on("value", (snapshot) => {
+            const task = [];
+            snapshot.forEach(data => {
+                task.push(data.val());
+            });
+            this.setState({
+                tasks: task,
+                loading: false
+            });
+        });
+    }
 
+
+    //TODO: Search
     handleSearchClick() {
-
+        // console.log("clicked!");
+        // database.ref.on("value", function(snapshot) {
+        //     console.log(snapshot.val());
+        // }, function (errorObject) {
+        //     console.log("The read failed: " + errorObject.code);
+        // });
+        // console.log(tasksData);
     }
 
 
     render() {
-        return (
+        return this.state.loading ? (
+            <div>
+                loading...
+            </div>
+        ) : (
             <Container fixed>
                 <div className="Market">
                     <hr/>
@@ -78,21 +75,22 @@ class Market extends Component {
                             <TableHead>
                                 <TableRow>
                                     <TableCell align="left">Task Title</TableCell>
-                                    <TableCell align="left">User Name</TableCell>
-                                    <TableCell align="left">Salary</TableCell>
-                                    <TableCell align="right">Post Date</TableCell>
+                                    <TableCell align="left">Desc</TableCell>
+                                    <TableCell align="left">Reward</TableCell>
+                                    <TableCell align="left">Post Date</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {
-                                    tasksData.map(row => (
-                                        <TableRow key={row.id}>
+                                    this.state.tasks.map(row => (
+                                        <TableRow key={row.task_id}>
                                             <TableCell align="left" component="th" scope="row">
-                                                <Link href={`/jobdetail/${row.id}`}>{row.taskTitle}</Link>
+                                                <Link href={`/jobdetail/${row.task_id}`}>{row.title}</Link>
                                             </TableCell>
-                                            <TableCell align="left">{row.userName}</TableCell>
-                                            <TableCell align="left">{row.salary}</TableCell>
-                                            <TableCell align="left">{}</TableCell>
+                                            <TableCell
+                                                align="left">{row.desc.length > 20 ? row.desc.substring(0, 20) + "..." : row.desc}</TableCell>
+                                            <TableCell align="left">{row.reward}</TableCell>
+                                            <TableCell align="left">{convertTime(row.postDate)}</TableCell>
                                         </TableRow>
                                     ))
                                 }
