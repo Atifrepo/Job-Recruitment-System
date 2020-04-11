@@ -9,6 +9,9 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import {NavLink} from 'react-router-dom'
+import {auth, database} from "./firebase";
+import {validate} from "validate.js";
+import moment from 'moment';
 
 const styles = theme => ({
     root: {
@@ -50,6 +53,26 @@ const DialogActions = withStyles(theme => ({
     },
 }))(MuiDialogActions);
 
+let constraints = {
+    name: {
+        presence: true
+    },
+    phone: {
+        length: {is: 10},
+        numericality: {
+            onlyInteger: true
+        },
+        presence: true
+    },
+    e_mail: {
+        presence: true,
+        email: true
+    },
+    desc: {
+        presence: true
+    }
+}
+
 
 class ApplyJobSuccess extends React.Component {
     constructor(props) {
@@ -59,12 +82,61 @@ class ApplyJobSuccess extends React.Component {
         }
     }
 
+    componentDidMount() {
+        let task_ref = database.ref("task/" + this.props.id);
+        task_ref.on("value", (snapshot) => {
+            if(snapshot.val()){
+                this.setState({
+                    title: snapshot.val().title
+                });
+            }
+        });
+        console.log(this.state.title)
+    }
+
 
     handleClickOpen = () => {
-        this.setState({
-            open: true
-        })
+        let currentComponent = this;
+        console.log(this.props.data)
+        let alertMsg = validate(this.props.data, constraints);
+        console.log(alertMsg);
+        if (alertMsg) {
+            let res = "";
+            for (let key of Object.keys(alertMsg)) {
+                res += (alertMsg[key][0] + '\n');
+            }
+            res += "Please verify your input.";
+            alert(res);
+        } else {
+            let taskId = this.props.id;
+            let data = this.props.data;
+            data['task_id'] = taskId;
+            data['status'] = "2.1";
+            data['title'] = this.state.title;
+            let newAppKey = database.ref().child('applicant').push().key;
+            let updates = {};
+
+            data['applicant_user_id'] = auth.currentUser.uid;
+            data['applicant_id'] = newAppKey;
+            updates['/applicant/' + newAppKey] = data;
+            updates['/task-applicant/' + taskId + '/applicant/' + newAppKey] = data;
+            updates['/user-applicant/' + auth.currentUser.uid + '/applicant/' + newAppKey] = data;
+            database.ref().update(updates, function (error) {
+                if (error) {
+                    alert("Something went wrong, please try again");
+                } else {
+                    // Data saved successfully!
+                    currentComponent.setState({
+                        applicantId: newAppKey,
+                        taskId: taskId,
+                        open: true
+                    })
+                }
+            });
+        }
+
     };
+
     handleClose = () => {
         this.setState({
             open: false

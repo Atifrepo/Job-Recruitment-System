@@ -7,7 +7,6 @@ import * as firebase from 'firebase';
 import FormError from './FormError';
 import './login.css'
 
-
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -16,6 +15,7 @@ class Login extends Component {
             password: '',
             errorMessage: null
         };
+
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);

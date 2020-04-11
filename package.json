@@ -1,5 +1,5 @@
 {
-  "name": "hello-world",
+  "name": "hello",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,13 +10,16 @@
     "@material-ui/icons": "latest",
     "firebase": "^7.12.0",
     "material-ui": "^0.20.2",
+    "moment": "^2.24.0",
     "npm-check-unused": "^6.0.0",
     "react": "^16.13.1",
     "react-addons-pure-render-mixin": "latest",
     "react-bootstrap": "^1.0.0",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "2.0.5"
+    "react-scripts": "2.0.5",
+    "reactstrap": "^8.4.1",
+    "validate.js": "^0.13.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -32,8 +35,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "devDependencies": {
-    "react-addons-pure-render-mixin": "^15.6.2"
-  }
+  ]
 }

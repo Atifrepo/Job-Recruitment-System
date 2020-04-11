@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import LeftPanelStudents from '../LeftPanelStudents';
+import {auth, database} from "../firebase";
+import withAuthorization from "../withAuthorization";
 
 class Student extends Component {
     constructor() {
@@ -9,14 +11,18 @@ class Student extends Component {
         }
     }
 
+
+
     render() {
         return (
             <div>
-                <LeftPanelStudents {...this.props}/>
+                <LeftPanelStudents {...this.props} />
             </div>
         );
     }
 
 }
 
-export default Student;
+const authCondition = authUser => !!authUser;
+
+export default withAuthorization(authCondition)( Student);

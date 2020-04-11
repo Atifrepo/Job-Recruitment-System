@@ -11,3 +11,29 @@
     color: black
 
 }
+
+#mypost {
+    color: #FFFFFF;
+    padding-left: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#mytask {
+    color: #FFFFFF;
+    padding-left: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: left
+}
+
+
+#mytask_background {
+    background-color: #152938;
+    height: 50px
+}
+
+#joblist {
+    padding-left: 10px
+}
+
