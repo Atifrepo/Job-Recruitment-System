@@ -3,89 +3,125 @@ import TextField from 'material-ui/TextField'
 import {Link} from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container';
+import * as firebase from 'firebase';
+import FormError from './FormError';
+import './login.css'
+
 
 class Login extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            myInfo: {
-                fName: '',
-                lName: '',
-                e_mail: '',
-                password: '',
-                cPassword: '',
-                country: '',
-                city: '',
-                Contact_Number: '',
-                Passport_Number: '',
-                NIC_Number: '',
+            email: '',
+            password: '',
+            errorMessage: null
+        };
 
-
-            },
-            fields: [],
-            // error: 'this is error'
-        }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleClick(event) {
-        this.props.history.push('/market');
+    handleChange(e) {
+        const itemName = e.target.name;
+        const itemValue = e.target.value;
+
+        this.setState({ [itemName]: itemValue });
     }
 
-    inputChange(changeValue, event) {
+    handleSubmit(e) {
+        var registrationInfo = {
+            email: this.state.email,
+            password: this.state.password
+        };
+        e.preventDefault();
 
-        this.state.myInfo[changeValue] = event.target.value;
-        this.setState({
-            myInfo: this.state.myInfo
-        });
-
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(
+                registrationInfo.email,
+                registrationInfo.password
+            )
+            .then(() => {
+                this.props.history.push('/market');
+            })
+            .catch(error => {
+                if (error.message !== null) {
+                    this.setState({ errorMessage: error.message });
+                } else {
+                    this.setState({ errorMessage: null });
+                }
+            });
     }
 
     render() {
         return (
-            <Container component="main" maxWidth="xs">
+            <form className="mt-3" onSubmit={this.handleSubmit}>
+                <div className="container">
+                    <div className="row justify-content-center">
+                        <div className="col-lg-6">
+                            <div className="card bg-light">
+                                <div className="card-body">
+                                    <h3 className="font-weight-light mb-3">Log in</h3>
+                                    <section className="form-group">
+                                        {this.state.errorMessage !== null ? (
+                                            <FormError
+                                                theMessage={this.state.errorMessage}
+                                            />
+                                        ) : null}
+                                        <label
+                                            className="form-control-label sr-only"
+                                            htmlFor="Email"
+                                        >
+                                            Email
+                                        </label>
+                                        <input
+                                            required
+                                            className="form-control"
+                                            type="email"
+                                            id="email"
+                                            name="email"
+                                            placeholder="Email"
+                                            value={this.state.email}
+                                            onChange={this.handleChange}
+                                        />
+                                    </section>
+                                    <section className="form-group">
+                                        <input
+                                            required
+                                            className="form-control"
+                                            type="password"
+                                            name="password"
+                                            placeholder="Password"
+                                            value={this.state.password}
+                                            onChange={this.handleChange}
+                                        />
+                                    </section>
+                                    <div className="form-group ">
+                                        <button className="btn btn-primary text-left col-sm-6 .btn-space" type="submit">
+                                            Log in
+                                        </button>
 
-                <div>
-                    <form>
-                        <TextField
-                            name="Email"
-                            hintText="Email"
-                            floatingLabelText="Email"
-                            value={this.state.myInfo.e_mail}
-                            onChange={this.inputChange.bind(this, "e_mail")}
-                            floatingLabelFixed
-
-                        />
-                        <br></br>
+                                        <Link to={{
+                                            pathname: '/Signup',
 
 
-                        <TextField
-                            name="password"
-                            hintText="Password"
-                            floatingLabelText="Password"
-                            value={this.state.myInfo.password}
-                            onChange={this.inputChange.bind(this, "password")}
-                            type="password"
-                            floatingLabelFixed
-                        />
-                        <br></br>
+                                        }}>
+                                            <button className="btn btn-primary  col-sm-6 .btn-space" >
+                                                Don't have account?
+                                            </button>
+                                        </Link>
+
+                                    </div>
 
 
-                        <Button variant="contained" onClick={(event) => this.handleClick(event)}><b>login</b></Button>
-                        <Link to={{
-                            pathname: '/Signup',
-                            data: this.state.myInfo
-
-                        }}>
-                            <Button variant="contained">Don't have account?</Button>
-                        </Link>
-                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </Container>
-
-        )
-
+            </form>
+        );
     }
-
 }
 
 export default Login

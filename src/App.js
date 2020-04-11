@@ -12,9 +12,9 @@ import {BrowserRouter as Router, Route,} from 'react-router-dom';
 import TaskDetails from "./TaskDetails";
 import PostJob from "./PostJob";
 import Profile from "./MyProfile"
+import * as firebase from 'firebase';
 
 class App extends Component {
-
 
     render() {
         return (
@@ -28,7 +28,8 @@ class App extends Component {
                             <Route exact path='/' component={Login}/>
                             <Route path='/apply' component={ApplyJob}/>
                             <Route path='/student' component={Student}/>
-                            <Route path='/SignUp' component={SignUp}/>
+                            <Route
+                                path="/Signup" component={SignUp}/>
                             <Route path='/JobSummary/:id' component={JobSummary}/>
                             <Route path='/market' component={Market}/>
                             <Route path='/jobdetail/:id' component={TaskDetails}/>
