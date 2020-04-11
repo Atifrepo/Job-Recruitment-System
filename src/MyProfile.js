@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import withAuthorization from "./withAuthorization";
 
 
 class Profile extends React.Component {
@@ -108,4 +109,6 @@ class Profile extends React.Component {
     }
 }
 
-export default Profile;
+const authCondition = authUser => !!authUser;
+
+export default withAuthorization(authCondition)( Profile);

@@ -9,6 +9,7 @@ import Item from "../Components/ContactList/Item";
 import {parseCode} from "../status";
 import JobSummaryApplyDelete from "./JobSummaryApplyDelete";
 import {convertTime} from "../timeFormat";
+import withAuthorization from "../withAuthorization";
 
 class JobSummaryApply extends Component {
     constructor() {
@@ -91,4 +92,6 @@ class JobSummaryApply extends Component {
 
 }
 
-export default JobSummaryApply;
+const authCondition = authUser => !!authUser;
+
+export default withAuthorization(authCondition)(JobSummaryApply);

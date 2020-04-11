@@ -8,6 +8,7 @@ import Logout from "./logout";
 import {auth, database} from "./firebase";
 import PureRenderMixin from "react-addons-pure-render-mixin";
 import JobListPost from "./Components/JobListPost";
+import withAuthorization from "./withAuthorization";
 
 class LeftPanelStudents extends React.Component {
 
@@ -123,5 +124,6 @@ class LeftPanelStudents extends React.Component {
             )
     }
 }
+const authCondition = authUser => !!authUser;
 
-export default LeftPanelStudents;
+export default withAuthorization(authCondition)( LeftPanelStudents);

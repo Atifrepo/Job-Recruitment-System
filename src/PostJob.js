@@ -4,6 +4,7 @@ import DatePicker from 'material-ui/DatePicker'
 import './signup.css';
 import PostJobSuccess from "./PostJobSuccess";
 import {auth, database} from './firebase';
+import withAuthorization from "./withAuthorization";
 
 class PostJob extends Component {
     constructor() {
@@ -129,4 +130,6 @@ class PostJob extends Component {
     };
 }
 
-export default PostJob
+const authCondition = authUser => !!authUser;
+
+export default withAuthorization(authCondition)( PostJob);

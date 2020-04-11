@@ -6,6 +6,7 @@ import {Container} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import TaskDetails_detail from "./TaskDetails_detail";
 import {auth} from "./firebase"
+import withAuthorization from "./withAuthorization";
 
 class TaskDetails extends Component {
 
@@ -58,4 +59,6 @@ console.log(this.state.uid);
 
 }
 
-export default TaskDetails
+const authCondition = authUser => !!authUser;
+
+export default withAuthorization(authCondition)( TaskDetails);

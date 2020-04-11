@@ -3,6 +3,7 @@ import TextField from 'material-ui/TextField';
 import './signup.css';
 import ApplyJobSuccess from "./ApplyJobSuccess.js";
 import {auth, database} from "./firebase";
+import withAuthorization from "./withAuthorization";
 
 
 class ApplyJob extends Component {
@@ -105,4 +106,6 @@ class ApplyJob extends Component {
     };
 }
 
-export default ApplyJob
+const authCondition = authUser => !!authUser;
+
+export default withAuthorization(authCondition)( ApplyJob)
