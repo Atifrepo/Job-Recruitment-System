@@ -1,13 +1,39 @@
 
-#left-navigation
-{
-height:500px;
-width:300px;
-background-color:#212121;
-margin-top:0px;
-margin-left:500px;
+#left-navigation {
+    height: 500px;
+    width: 300px;
+    background-color: #212121;
+    margin-top: 0px;
+    margin-left: 500px;
 }
-.link{
-color:black
+
+.link {
+    color: black
 
 }
+
+#mypost {
+    color: #FFFFFF;
+    padding-left: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#mytask {
+    color: #FFFFFF;
+    padding-left: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: left
+}
+
+
+#mytask_background {
+    background-color: #152938;
+    height: 50px
+}
+
+#joblist {
+    padding-left: 10px
+}
+

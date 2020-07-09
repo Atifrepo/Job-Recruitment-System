@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import LeftPanelStudents from '../LeftPanelStudents';
-import * as firebase from 'firebase';
-import Logout from '../logout';
+import {auth, database} from "../firebase";
+import withAuthorization from "../withAuthorization";
 
 class Student extends Component {
     constructor() {
@@ -10,24 +10,19 @@ class Student extends Component {
             firebase: ''
         }
     }
-    getData() {
-        var userId = firebase.auth().currentUser.uid;
-        firebase.database().ref('USER').once('value').then(function (snapshot) {
-            var username = snapshot.val();
-            console.log(snapshot.val());
-            console.log('hello student')
 
-        })
-    }
+
+
     render() {
         return (
             <div>
-                
-                <LeftPanelStudents {...this.props}/>
-                <Logout {...this.props}/>
+                <LeftPanelStudents {...this.props} />
             </div>
         );
     }
 
 }
-export default Student;
+
+const authCondition = authUser => !!authUser;
+
+export default withAuthorization(authCondition)( Student);

@@ -1,0 +1,15 @@
+.Market {
+    background-color: #FFFFFF;
+}
+
+.MarketHeader {
+    /*background-image: linear-gradient(#E66465, #9198E5);*/
+    /*height: 100px;*/
+    background-color: #FFFFFF;
+    color: black;
+}
+
+.MarketList {
+    background-color: #FFFFFF;
+    text-align: left;
+}

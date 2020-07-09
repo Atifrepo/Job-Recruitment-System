@@ -1,157 +1,127 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import TextField from 'material-ui/TextField'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import Button from '@material-ui/core/Button'
+import Container from '@material-ui/core/Container';
 import * as firebase from 'firebase';
-import AppBar from 'material-ui/AppBar/AppBar';
+import FormError from './FormError';
+import './login.css'
 
 class Login extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            myInfo: {
-                fName: '',
-                lName: '',
-                e_mail: '',
-                password: '',
-                cPassword: '',
-                country: '',
-                city: '',
-                Contact_Number: '',
-                Passport_Number: '',
-                NIC_Number: '',
-                 type: ''
+            email: '',
+            password: '',
+            errorMessage: null
+        };
 
-            },
-            fields: [],
-            // error: 'this is error'
-        }
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleClick(event) {
-        firebase.auth().signInWithEmailAndPassword(this.state.myInfo.e_mail, this.state.myInfo.password).then((sucess, error) => {
-            // var errorCode = error.code;
-            // var errorMessage = error.message;
-            // if (errorCode === 'auth/wrong-password') {
-            //     alert('Wrong password.');
-            // } else {
-            //     alert(errorMessage);
+    handleChange(e) {
+        const itemName = e.target.name;
+        const itemValue = e.target.value;
 
-            var typeCheck;
-            var userId = firebase.auth().currentUser.uid;
-            const rootRef = firebase.database().ref();
-            const speedRef = rootRef.child('USER/' + userId);
-            speedRef.on('value', snap => {
-                typeCheck = snap.val().type;
-                //console.log(typeCheck);
-                
-                if (typeCheck == 'student') {
+        this.setState({ [itemName]: itemValue });
+    }
 
-                    this.props.history.push('/student');
-                    console.log("if k andr hun");
-                }
-                // console.log('Hello Student!');
+    handleSubmit(e) {
+        var registrationInfo = {
+            email: this.state.email,
+            password: this.state.password
+        };
+        e.preventDefault();
 
-                if (typeCheck == 'company') {
-
-                    this.props.history.push('/company');
-                    console.log(typeCheck);
-                }
-                //console.log('hello Company');
-                if (typeCheck == 'Admin') {
-                    this.props.history.push('/Admin');
-                }
-
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(
+                registrationInfo.email,
+                registrationInfo.password
+            )
+            .then(() => {
+                this.props.history.push('/market');
             })
-
-
-
-            // if (error) {
-            //    console.log('error');
-            // }
-            // if (sucess) {
-            //     console.log('success');
-            // }
-            // // }
-            // //alert('error', error,'sucess', sucess);
-        }).catch((error) => {
-            alert('invalid email or password', error);
-        })
-
-
-
-
-    }
-
-    // successMessage(event) {
-
-    //     this.state.fields.push(this.state.myInfo);
-    //     this.setState({
-    //         fields: this.state.fields
-    //     })
-    //     console.log('hi there', this.state.myInfo)
-    //     event.preventDefault();
-    // }
-
-    inputChange(changeValue, event) {
-
-        this.state.myInfo[changeValue] = event.target.value;
-        //       console.log('event', event.target.value);
-        this.setState({
-            myInfo: this.state.myInfo
-        });
-
+            .catch(error => {
+                if (error.message !== null) {
+                    this.setState({ errorMessage: error.message });
+                } else {
+                    this.setState({ errorMessage: null });
+                }
+            });
     }
 
     render() {
         return (
+            <form className="mt-3" onSubmit={this.handleSubmit}>
+                <div className="container">
+                    <div className="row justify-content-center">
+                        <div className="col-lg-6">
+                            <div className="card bg-light">
+                                <div className="card-body">
+                                    <h3 className="font-weight-light mb-3">Log in</h3>
+                                    <section className="form-group">
+                                        {this.state.errorMessage !== null ? (
+                                            <FormError
+                                                theMessage={this.state.errorMessage}
+                                            />
+                                        ) : null}
+                                        <label
+                                            className="form-control-label sr-only"
+                                            htmlFor="Email"
+                                        >
+                                            Email
+                                        </label>
+                                        <input
+                                            required
+                                            className="form-control"
+                                            type="email"
+                                            id="email"
+                                            name="email"
+                                            placeholder="Email"
+                                            value={this.state.email}
+                                            onChange={this.handleChange}
+                                        />
+                                    </section>
+                                    <section className="form-group">
+                                        <input
+                                            required
+                                            className="form-control"
+                                            type="password"
+                                            name="password"
+                                            placeholder="Password"
+                                            value={this.state.password}
+                                            onChange={this.handleChange}
+                                        />
+                                    </section>
+                                    <div className="form-group ">
+                                        <button className="btn btn-primary text-left col-sm-6 .btn-space" type="submit">
+                                            Log in
+                                        </button>
+
+                                        <Link to={{
+                                            pathname: '/Signup',
 
 
-            <div>
-                <form>
-                    <div>
-                        <AppBar style={{ backgroundColor: '#212121' }} title='Login' ></AppBar>
+                                        }}>
+                                            <button className="btn btn-primary  col-sm-6 .btn-space" >
+                                                Don't have account?
+                                            </button>
+                                        </Link>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <TextField
-                        name="e_mail"
-                        hintText="Email"
-                        floatingLabelText="Email"
-                        value={this.state.myInfo.e_mail}
-                        onChange={this.inputChange.bind(this, "e_mail")}
-                        floatingLabelFixed
-
-                    />
-                    <br></br>
-
-
-                    <TextField
-                        name="password"
-                        hintText="Password"
-                        floatingLabelText="Password"
-                        value={this.state.myInfo.password}
-                        onChange={this.inputChange.bind(this, "password")}
-                        type="password"
-                        floatingLabelFixed
-                    />
-                    <br></br>
-
-
-
-                    <Button variant="contained" onClick={(event) => this.handleClick(event)}><b>login</b></Button>
-                    <Link to={{
-                        pathname: '/Signup',
-                        data: this.state.myInfo
-
-
-                    }}>
-                        <Button variant="contained" >Don't have account?</Button>
-                    </Link>
-                </form>
-            </div>
-
-        )
-
+                </div>
+            </form>
+        );
     }
-
 }
+
 export default Login

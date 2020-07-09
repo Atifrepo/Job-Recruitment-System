@@ -1,0 +1,14 @@
+.Task {
+    background-color: #FFFFFF;
+}
+
+.TaskHeader {
+    background-color: #FFFFFF;
+    color: black;
+}
+
+.TaskInfo {
+
+    background-color: #F8F8FF;
+    text-align: left;
+}

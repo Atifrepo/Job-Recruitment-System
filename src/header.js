@@ -1,25 +1,70 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import Nav from './Nav';
-import Login from './login';
-import SideBar from './layout/sidebar';
-// The Header creates links that can be used to navigate
-// between routes.
-const Header = () => (
-  <header>
-    <nav>
-      <ul>
-        {/* <li ><Link to='/'>Home</Link></li> */}
-         {/* <li><Link to='/login'>login</Link></li> 
-         <li><Link to='/signup'>signup</Link></li>*/}
-         {/* <li><Link to='/Student'>student</Link></li>  */}
-          <Login />  
-        <Nav />
-        <SideBar />
+import React, {Component} from 'react'
+import {auth, database} from './firebase';
+import {Link} from 'react-router-dom'
 
-      </ul>
-    </nav>
-  </header>
-)
+const navStyle = {
+    color: 'white'
+};
+
+class Header extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            currentUser: {},
+        }
+
+        this.userRef = database.ref('/users').child('Anonymous');
+
+    }
+
+    componentDidMount() {
+        auth.onAuthStateChanged((currentUser) => {
+            this.setState({currentUser: currentUser || {}});
+            if (currentUser) {
+                // Init current user Refs
+                this.userRef = database.ref('/users').child(currentUser.uid);
+
+                // Add user to users database if not exist
+                this.userRef.once('value', (snapshot) => {
+                    const userData = snapshot.val();
+                    if (!userData) {
+                        this.userRef.set({name: currentUser.displayName});
+                    }
+                });
+
+            }
+        });
+    }
+
+     render() {
+        return (
+            <nav>
+                <Link style={navStyle} to="/"><h3>JobHunter</h3></Link>
+                <ul className="nav-links">
+                    <Link style={navStyle} style={{'color': '#fb601d'}} to="/postjob">
+                        <li>Post Task</li>
+                    </Link>
+                    <Link style={navStyle} to="/market">
+                        <li>Find Tasks</li>
+                    </Link>
+                    <Link style={navStyle} to="/student">
+                        <li>My Tasks</li>
+                    </Link>
+                    {this.state.currentUser.email ?
+                        <Link style={navStyle} to="/profile">
+                            <li>My Account</li>
+                        </Link>
+                        :
+                        <Link style={navStyle} to="/login">
+                            <li>Sign In</li>
+                        </Link>
+                    }
+
+                </ul>
+            </nav>
+        )
+    }
+}
 
 export default Header
